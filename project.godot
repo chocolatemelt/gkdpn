@@ -16,15 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="gkdpn"
-config/description="This demo shows a traditional isometric view with depth sorting.
-
-A character can move around the level and will also slide around objects,
-as well as be occluded when standing in front or behind them."
-run/main_scene="res://scenes/dungeon.tscn"
+config/description="kadopon proof of concept"
+run/main_scene="res://menus/MainMenu.tscn"
 config/icon="res://assets/icon.png"
 
 [display]
 
+window/size/width=1366
+window/size/height=768
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
