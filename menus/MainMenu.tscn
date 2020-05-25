@@ -69,7 +69,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="CommitLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
 margin_top = 256.0
 margin_right = 537.0
 margin_bottom = 278.0
@@ -88,7 +88,7 @@ margin_bottom = 693.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Boxes\?" type="TextureRect" parent="HBoxContainer/CenterContainer"]
+[node name="SAILORMOON" type="TextureRect" parent="HBoxContainer/CenterContainer"]
 margin_left = 66.0
 margin_top = 177.0
 margin_right = 599.0
