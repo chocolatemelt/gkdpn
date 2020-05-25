@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+commit=$(git rev-parse --short HEAD)
+
+echo -e $commit > build_commit.txt
+
