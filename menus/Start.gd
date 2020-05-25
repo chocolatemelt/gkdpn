@@ -1,4 +1,4 @@
-extends TextureRect
+extends LinkButton
 
 func _ready():
 	pass
@@ -6,15 +6,5 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_Start_mouse_entered():
-	print("ooh")
-
-
-func _on_Start_mouse_exited():
-	print("ahh")
-
-
-func _on_Start_gui_input(event):
-	if event is InputEventMouseButton:
-		if event.pressed:
-			get_tree().change_scene("res://scenes/dungeon.tscn")
+func _on_LinkButton_button_up():
+	get_tree().change_scene("res://scenes/dungeon.tscn")
