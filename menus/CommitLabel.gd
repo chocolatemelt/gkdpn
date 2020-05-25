@@ -9,4 +9,4 @@ func _ready():
 		self.set_text("unable to read commit")
 		return
 	var commit = file.get_line()
-	self.set_text(commit)
+	self.set_text("commit " + commit)
