@@ -15,4 +15,7 @@ func _ready():
 	var this = Item
 	var title
 	var type
+	var implicit
+	var explicit
+	var flavor
 	
