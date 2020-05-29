@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://menus/CommitLabel.gd" type="Script" id=1]
+[ext_resource path="res://menus/Quit.gd" type="Script" id=2]
 [ext_resource path="res://assets/ui/characters.png" type="Texture" id=3]
 [ext_resource path="res://menus/Start.gd" type="Script" id=5]
 [ext_resource path="res://assets/typography/Maragsâ.otf" type="DynamicFontData" id=6]
@@ -61,9 +62,9 @@ custom_constants/separation = 30
 alignment = 1
 
 [node name="StartButton" type="LinkButton" parent="HBoxContainer/VBoxContainer/MenuOptions"]
-margin_top = 71.0
+margin_top = 28.0
 margin_right = 116.0
-margin_bottom = 128.0
+margin_bottom = 85.0
 size_flags_horizontal = 0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -71,6 +72,18 @@ custom_constants/underline_spacing = 5
 text = "start"
 underline = 1
 script = ExtResource( 5 )
+
+[node name="QuitButton" type="LinkButton" parent="HBoxContainer/VBoxContainer/MenuOptions"]
+margin_top = 115.0
+margin_right = 92.0
+margin_bottom = 172.0
+size_flags_horizontal = 0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_constants/underline_spacing = 5
+text = "quit"
+underline = 1
+script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 408.0
@@ -106,3 +119,4 @@ margin_right = 567.0
 margin_bottom = 473.0
 texture = ExtResource( 3 )
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/MenuOptions/StartButton" to="HBoxContainer/VBoxContainer/MenuOptions/StartButton" method="_on_LinkButton_button_up"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/MenuOptions/QuitButton" to="HBoxContainer/VBoxContainer/MenuOptions/QuitButton" method="_on_LinkButton_button_up"]
