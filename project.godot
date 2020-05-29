@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Item",
 "language": "GDScript",
 "path": "res://entities/items/Item.gd"
+}, {
+"base": "Node",
+"class": "Modifier",
+"language": "GDScript",
+"path": "res://entities/items/Modifier.gd"
 } ]
 _global_script_class_icons={
-"Item": ""
+"Item": "",
+"Modifier": ""
 }
 
 [application]
@@ -27,8 +33,10 @@ config/icon="res://assets/icon.png"
 
 [autoload]
 
-Global="*res://globals/Global.gd"
 Math="*res://globals/Math.gd"
+Globals="*res://globals/Globals.gd"
+Attributes="*res://globals/constants/Attributes.gd"
+Modifiers="*res://globals/constants/Modifiers.gd"
 
 [display]
 

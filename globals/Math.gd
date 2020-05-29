@@ -1,6 +1,7 @@
 extends Node
 
 var prng = RandomNumberGenerator.new()
+
 func _ready():
 	prng.randomize()
 
