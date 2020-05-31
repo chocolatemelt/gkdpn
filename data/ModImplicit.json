@@ -1,0 +1,10 @@
+{
+  "bow_bonding": {
+    "mods": [
+      {
+        "attribute": "bow_bonding"
+      }
+    ],
+    "tooltip": "Creatures deal 10% less damage to you"
+  }
+}

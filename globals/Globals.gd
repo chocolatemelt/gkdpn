@@ -8,7 +8,7 @@ func _ready():
 static func generate_item():
 	var title = Item.generate_name()
 	var type = Math.roll(0,5)
-	var implicit = Modifier.new(Modifiers.PHYS_DAMAGE_FLAT)
-	var explicit = []
+	var implicit
+	var explicit
 	var flavor:String = "(MSNAME_FLAVOR)"
 	return Item.new(title, type, flavor, implicit, explicit)

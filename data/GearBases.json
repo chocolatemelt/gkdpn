@@ -1,0 +1,84 @@
+{
+  "helmet": [
+    {
+      "_id": "armour_helm1",
+      "title": "Iron Cap",
+      "tooltip": "A cap reinforced with iron.",
+      "implicit": "",
+      "level": 1,
+      "threshold": [
+        {
+          "thresholdKey": "strength",
+          "thresholdValue": 9
+        }
+      ],
+      "stats": [
+        {
+          "attribute": "armour",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "_id": "armour_helm2",
+      "title": "Rusted Helmet",
+      "tooltip": "An old, rusty helmet.",
+      "implicit": "",
+      "level": 4,
+      "threshold": [
+        {
+          "thresholdKey": "strength",
+          "thresholdValue": 15
+        }
+      ],
+      "stats": [
+        {
+          "attribute": "armour",
+          "value": 15
+        }
+      ]
+    }
+  ],
+  "chest": [],
+  "gloves": [],
+  "boots": [],
+  "accessory": [],
+  "1h_sword": [],
+  "2h_sword": [],
+  "dagger": [],
+  "1h_axe": [],
+  "2h_axe": [],
+  "staff": [],
+  "bow": [
+    {
+      "_id": "bonders_bow",
+      "title": "Bonder's Bow",
+      "tooltip": "A bow once used by the bonders of a forgotten plane.",
+      "implicit": "bow_bonding",
+      "level": 84,
+      "threshold": [
+        {
+          "thresholdKey": "dexterity",
+          "thresholdValue": 274
+        }
+      ],
+      "stats": [
+        {
+          "attribute": "physical_damage",
+          "valueMin": 65,
+          "valueMax": 102
+        },
+        {
+          "attribute": "critical_strike_chance",
+          "value": 550
+        },
+        {
+          "attribute": "attack_speed",
+          "value": 140
+        }
+      ]
+    }
+  ],
+  "quiver": [],
+  "shield": []
+}

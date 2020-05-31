@@ -1,0 +1,42 @@
+{
+  "flatLife": [
+    {
+      "_id": "life1",
+      "type": "prefix",
+      "affix": "Hearty",
+      "tooltip": "+(8-12) to maximum life"
+    },
+    {
+      "_id": "life2",
+      "type": "prefix",
+      "affix": "Hale",
+      "tooltip": "+(12-16) to maximum life"
+    },
+    {
+      "_id": "life3",
+      "type": "prefix",
+      "affix": "Stout",
+      "tooltip": "+(16-20) to maximum life"
+    }
+  ],
+  "flatMana": [
+    {
+      "_id": "mana1",
+      "type": "prefix",
+      "affix": "Tingling",
+      "tooltip": "+(22-30) to maximum mana"
+    },
+    {
+      "_id": "mana2",
+      "type": "prefix",
+      "affix": "Energized",
+      "tooltip": "+(22-30) to maximum mana"
+    },
+    {
+      "_id": "mana3",
+      "type": "prefix",
+      "affix": "Thrilling",
+      "tooltip": "+(22-30) to maximum mana"
+    }
+  ]
+}
