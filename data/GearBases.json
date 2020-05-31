@@ -17,7 +17,8 @@
           "attribute": "armour",
           "value": 9
         }
-      ]
+      ],
+      "tags": ["armour", "helmet"]
     },
     {
       "_id": "armour_helm2",
@@ -36,7 +37,8 @@
           "attribute": "armour",
           "value": 15
         }
-      ]
+      ],
+      "tags": ["armour", "helmet"]
     }
   ],
   "chest": [],
@@ -76,7 +78,8 @@
           "attribute": "attack_speed",
           "value": 140
         }
-      ]
+      ],
+      "tags": ["weapon", "bow", "bonders"]
     }
   ],
   "quiver": [],

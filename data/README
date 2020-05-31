@@ -1,0 +1,30 @@
+notes..
+
+these should all be auto-generated at some point, probably by storing all the values in an rdbms (sqlite) and exporting them individually.
+i haven't bothered to set that up yet so i just hard coded some basic things for now.
+it's still wip so things will change :)
+
+GearBases
+--
+all the available gear bases. _id should be used to reference the base itself and used internally.
+implicit should reference the internal _id of an implicit mod (which should be declared in ModImplicit).
+attributes should also reference an internal _id, though these are just the base attributes of a character.
+tags indicate what mods this can roll (by default, anyway)
+
+ModGear
+--
+all the available explicit mods for gear, including craftable/unique/whathaveyou. the key is the internal grouping id.
+again, _id is the internal reference for the specific mod.
+tooltip should probably be a format string of some sort...
+
+ModImplicit
+--
+all the available implicit mods for gear, including craftable/corrupted/whatevers.
+the key is the internal reference here, since implicits don't have any meaningful grouping.
+in the case that an implicit is just an amalgamation of several mods, mods is an array; probably not going to be useful in the majority of cases though.
+the attribute, similarly, references an internal _id, but unlike gear bases, these aren't limited to base attributes.
+
+WeightKeys / WeightValues
+__
+two dictionaries that indicate what mods are available for each particular tag, and the weighting for each particular mod.
+any given piece of gear should have a set of tags that identify what mods it can roll.
