@@ -33,6 +33,7 @@ config/icon="res://assets/icon.png"
 
 [autoload]
 
+Data="*res://globals/Data.gd"
 Globals="*res://globals/Globals.gd"
 Math="*res://globals/Math.gd"
 

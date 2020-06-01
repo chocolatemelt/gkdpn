@@ -1,8 +1,8 @@
 extends Node
 
 func _ready():
-	var test_item = generate_item()
-	test_item.print()
+	#var test_item = generate_item()
+	#test_item.print()
 	pass
 
 static func generate_item():
