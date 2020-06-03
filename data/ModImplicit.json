@@ -5,6 +5,12 @@
         "attribute": "bow_bonding"
       }
     ],
-    "tooltip": "Creatures deal 10% less damage to you"
+    "tooltip": "Creatures deal %d%% less damage to you",
+    "values": [
+      {
+        "min": 10,
+        "max": 10
+      }
+    ]
   }
 }

@@ -4,19 +4,37 @@
       "_id": "life1",
       "type": "prefix",
       "affix": "Hearty",
-      "tooltip": "+(8-12) to maximum life"
+      "tooltip": "+(%d-%d) to maximum life",
+      "values": [
+        {
+          "min": 8,
+          "max": 12
+        }
+      ]
     },
     {
       "_id": "life2",
       "type": "prefix",
       "affix": "Hale",
-      "tooltip": "+(12-16) to maximum life"
+      "tooltip": "+(%d-%d) to maximum life",
+      "values": [
+        {
+          "min": 12,
+          "max": 16
+        }
+      ]
     },
     {
       "_id": "life3",
       "type": "prefix",
       "affix": "Stout",
-      "tooltip": "+(16-20) to maximum life"
+      "tooltip": "+(%d-%d) to maximum life",
+      "values": [
+        {
+          "min": 16,
+          "max": 20
+        }
+      ]
     }
   ],
   "flatMana": [
@@ -24,19 +42,37 @@
       "_id": "mana1",
       "type": "prefix",
       "affix": "Tingling",
-      "tooltip": "+(22-30) to maximum mana"
+      "tooltip": "+(%d-%d) to maximum mana",
+      "values": [
+        {
+          "min": 22,
+          "max": 30
+        }
+      ]
     },
     {
       "_id": "mana2",
       "type": "prefix",
       "affix": "Energized",
-      "tooltip": "+(22-30) to maximum mana"
+      "tooltip": "+(%d-%d) to maximum mana",
+      "values": [
+        {
+          "min": 30,
+          "max": 38
+        }
+      ]
     },
     {
       "_id": "mana3",
       "type": "prefix",
       "affix": "Thrilling",
-      "tooltip": "+(22-30) to maximum mana"
+      "tooltip": "+(%d-%d) to maximum mana",
+      "values": [
+        {
+          "min": 38,
+          "max": 44
+        }
+      ]
     }
   ]
 }
