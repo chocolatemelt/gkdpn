@@ -27,13 +27,14 @@ func _init(t, ty, f, i, e=[]):
 	implicit = i
 	explicit = e
 
-func print():
+func print(verbose:bool = false):
 	print(title)
 	print("---")
 	print("slot %d" % type)
-	print("implicit mod %s" % implicit.prints())
+	if(implicit != null):
+		print("implicit mod %s" % implicit.to_string(verbose))
 	for mod in explicit:
-		print("explicit mod %s" % mod.prints())
+		print("explicit mod %s" % mod.to_string(verbose))
 	print(flavor)
 
 static func generate_name():

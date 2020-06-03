@@ -11,6 +11,9 @@ func _init():
 func roll(begin:int = 1, end:int = 6):
 	return prng.randi_range(begin, end)
 
+func roll_array(a:Array):
+	return a[prng.randi_range(0, a.size() - 1)]
+
 func sample(a:Array, n:int = 1):
 	var set = a.duplicate()
 	var sample = []
