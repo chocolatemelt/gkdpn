@@ -4,7 +4,7 @@ func _ready():
 	#var test_item = generate_item()
 	#test_item.print()
 	var x = Modifier.new(Data.ModGear.flatLife[0])
-	print(x.prints())
+	print(x.to_string(true))
 	pass
 
 static func generate_item():
