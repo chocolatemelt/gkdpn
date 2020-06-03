@@ -1,10 +1,11 @@
 {
   "bow_bonding": {
-    "mods": [
+    "data": [
       {
         "attribute": "bow_bonding"
       }
     ],
+    "stat_line": "Creatures deal %d%% less damage to you",
     "tooltip": "Creatures deal %d%% less damage to you",
     "values": [
       {

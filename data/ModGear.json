@@ -4,6 +4,7 @@
       "_id": "life1",
       "type": "prefix",
       "affix": "Hearty",
+      "stat_line": "+%d to maximum life",
       "tooltip": "+(%d-%d) to maximum life",
       "values": [
         {
@@ -16,6 +17,7 @@
       "_id": "life2",
       "type": "prefix",
       "affix": "Hale",
+      "stat_line": "+%d to maximum life",
       "tooltip": "+(%d-%d) to maximum life",
       "values": [
         {
@@ -28,6 +30,7 @@
       "_id": "life3",
       "type": "prefix",
       "affix": "Stout",
+      "stat_line": "+%d to maximum life",
       "tooltip": "+(%d-%d) to maximum life",
       "values": [
         {
@@ -42,6 +45,7 @@
       "_id": "mana1",
       "type": "prefix",
       "affix": "Tingling",
+      "stat_line": "+%d to maximum mana",
       "tooltip": "+(%d-%d) to maximum mana",
       "values": [
         {
@@ -54,6 +58,7 @@
       "_id": "mana2",
       "type": "prefix",
       "affix": "Energized",
+      "stat_line": "+%d to maximum mana",
       "tooltip": "+(%d-%d) to maximum mana",
       "values": [
         {
@@ -66,6 +71,7 @@
       "_id": "mana3",
       "type": "prefix",
       "affix": "Thrilling",
+      "stat_line": "+%d to maximum mana",
       "tooltip": "+(%d-%d) to maximum mana",
       "values": [
         {
