@@ -2,23 +2,28 @@ extends Node
 
 class_name Modifier
 
-var modifier:String
-var title:String
-var affix:bool
+enum Types {
+	PREFIX,
+	SUFFIX
+}
 
-var value:int
-var low:int
-var high:int
-var data # escape hatch for now, if none of the above work
+var _id:String
+var affix:String
+var tooltip:String
+var type:int
+var values:Array
+var data # escape hatch for now, if none of the above are valid
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
-func _init(m):
-	modifier = m
+func _init(m:Dictionary):
+	_id = m._id
+	affix = m.affix
+	tooltip = m.tooltip # TODO: format properly based on values
+	type = Types.PREFIX if m.type == "prefix" else Types.SUFFIX
+	values = m.values
+	pass
 
 func prints():
-	return "%s" % modifier
-
-static func roll_modifier():
-	pass
+	return "%s" % affix

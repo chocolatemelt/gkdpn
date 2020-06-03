@@ -3,6 +3,8 @@ extends Node
 func _ready():
 	#var test_item = generate_item()
 	#test_item.print()
+	var x = Modifier.new(Data.ModGear.flatLife[0])
+	print(x.prints())
 	pass
 
 static func generate_item():
