@@ -1,10 +1,7 @@
 extends Node
 
 func _ready():
-	#var test_item = generate_item()
-	#test_item.print()
-	var x = Modifier.new(Data.ModGear.flatLife[0])
-	print(x.to_string(true))
+	roll_mod("armour")
 	pass
 
 static func generate_item():
@@ -14,3 +11,7 @@ static func generate_item():
 	var explicit
 	var flavor:String = "(MSNAME_FLAVOR)"
 	return Item.new(title, type, flavor, implicit, explicit)
+
+static func roll_mod(item_type:String):
+	var mods_available = Data.WeightKeys[item_type]
+	var mods_rolled = Math.sample(mods_available)
