@@ -23,3 +23,4 @@ static func roll_mods(item_type:String, n:int = 1):
 		var mod_data = Math.roll_array(Data.ModGear[mod])
 		ret.push_back(Modifier.new(mod_data))
 	return ret
+

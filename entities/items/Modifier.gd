@@ -18,6 +18,11 @@ var data # escape hatch for now, if none of the above are valid
 func _ready():
 	pass
 
+"""
+modifier constructor...
+
+m -- dictionary of modifier values
+"""
 func _init(m:Dictionary):
 	_id = m._id
 	affix = m.affix

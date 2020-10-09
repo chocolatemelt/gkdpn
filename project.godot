@@ -35,6 +35,7 @@ config/icon="res://assets/icon.png"
 
 Data="*res://globals/Data.gd"
 Globals="*res://globals/Globals.gd"
+SaveState="*res://globals/SaveState.gd"
 Math="*res://globals/Math.gd"
 
 [display]
