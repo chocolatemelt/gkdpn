@@ -1,29 +1,25 @@
-extends KinematicBody2D
+extends Area2D
 
-const MOTION_SPEED = 400 # px/s
+var tile_size = 64
+var inputs = {
+	"move_right": Vector2.RIGHT,
+	"move_left": Vector2.LEFT,
+	"move_up": Vector2.UP,
+	"move_down": Vector2.DOWN,
+}
 
-var motion = Vector2()
+# func _ready():
+	# TODO: snap to isometric grid?
+	# position = position.snapped(Vector2.ONE * tile_size)
+
 
 func cartesian_to_isometric(cartesian):
-	var screen_pos = Vector2()
-	screen_pos.x = cartesian.x - cartesian.y
-	screen_pos.y = (cartesian.x + cartesian.y) / 2
-	return screen_pos
+	return Vector2(cartesian.x - cartesian.y, (cartesian.x + cartesian.y) / 2)
 
-func _physics_process(_delta):
-	var direction = Vector2()
-	if Input.is_action_pressed("move_up"):
-		direction += Vector2(0, -1)
-	elif Input.is_action_pressed("move_down"):
-		direction += Vector2(0, 1)
-	
-	if Input.is_action_pressed("move_left"):
-		direction += Vector2(-1, 0)
-	elif Input.is_action_pressed("move_right"):
-		direction += Vector2(1, 0)
+func _unhandled_input(event):
+	for dir in inputs.keys():
+		if event.is_action_pressed(dir):
+			move(dir)
 
-	motion = direction.normalized() * MOTION_SPEED * _delta
-	motion = cartesian_to_isometric(motion)
-
-	#warning-ignore:return_value_discarded
-	move_and_slide(motion)
+func move(dir):
+	position += cartesian_to_isometric(inputs[dir] * tile_size)
