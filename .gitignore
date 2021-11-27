@@ -12,4 +12,5 @@ data_*/
 
 # Project ignores
 build/
+build_commit.txt
 
