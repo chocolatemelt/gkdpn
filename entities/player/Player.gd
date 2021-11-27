@@ -1,16 +1,17 @@
 extends Area2D
 
-var tile_size = 64
+const TILE_SIZE = 64 # tile height, not tile width
 var inputs = {
 	"move_right": Vector2.RIGHT,
 	"move_left": Vector2.LEFT,
 	"move_up": Vector2.UP,
 	"move_down": Vector2.DOWN,
 }
+onready var ray = $RayCast2D
 
 # func _ready():
 	# TODO: snap to isometric grid?
-	# position = position.snapped(Vector2.ONE * tile_size)
+	# position = position.snapped(Vector2.ONE * TILE_SIZE)
 
 
 func cartesian_to_isometric(cartesian):
@@ -22,4 +23,8 @@ func _unhandled_input(event):
 			move(dir)
 
 func move(dir):
-	position += cartesian_to_isometric(inputs[dir] * tile_size)
+	var move = cartesian_to_isometric(inputs[dir] * TILE_SIZE)
+	ray.cast_to = move
+	ray.force_raycast_update()
+	if !ray.is_colliding():
+		position += move
