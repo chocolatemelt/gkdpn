@@ -27,8 +27,8 @@ texture = SubResource( 1 )
 offset = Vector2( 0, -16 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -64, -32 )
-polygon = PoolVector2Array( 64, 64, 128, 32, 64, 0, 0, 32 )
+polygon = PoolVector2Array( -64, 0, 0, 32, 64, 0, 0, -32 )
+disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

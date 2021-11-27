@@ -9,9 +9,8 @@ var inputs = {
 }
 onready var ray = $RayCast2D
 
-# func _ready():
-	# TODO: snap to isometric grid?
-	# position = position.snapped(Vector2.ONE * TILE_SIZE)
+func _ready():
+	position = position.snapped(Vector2.ONE * TILE_SIZE / 2)
 
 
 func cartesian_to_isometric(cartesian):
