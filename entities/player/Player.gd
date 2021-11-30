@@ -19,11 +19,18 @@ func cartesian_to_isometric(cartesian):
 func _unhandled_input(event):
 	for dir in inputs.keys():
 		if event.is_action_pressed(dir):
-			move(dir)
+			move_in_direction(dir)
 
-func move(dir):
+func move_in_direction(dir):
 	var move = cartesian_to_isometric(inputs[dir] * TILE_SIZE)
 	ray.cast_to = move
 	ray.force_raycast_update()
 	if !ray.is_colliding():
 		position += move
+
+# wtf
+func move(coords):
+	var snap = cartesian_to_isometric(coords) * TILE_SIZE
+	snap = snap.snapped(Vector2.ONE * TILE_SIZE)
+	print(snap)
+	position = snap
