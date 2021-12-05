@@ -28,9 +28,6 @@ func move_in_direction(dir):
 	if !ray.is_colliding():
 		position += move
 
-# wtf
 func move(coords):
-	var snap = cartesian_to_isometric(coords) * TILE_SIZE
-	snap = snap.snapped(Vector2.ONE * TILE_SIZE)
-	print(snap)
+	var snap = coords.snapped(Vector2.ONE * TILE_SIZE / 2)
 	position = snap
