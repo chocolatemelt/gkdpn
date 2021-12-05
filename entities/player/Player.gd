@@ -30,4 +30,4 @@ func move_in_direction(dir):
 
 func move(coords):
 	var snap = coords.snapped(Vector2.ONE * TILE_SIZE / 2)
-	position = snap
+	position = snap + Vector2(0, TILE_SIZE / 2) # drop to center of tile instead of top
