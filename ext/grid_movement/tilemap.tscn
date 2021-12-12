@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ext/grid_movement/images/roguelikeSheet_transparent.png" type="Texture" id=1]
+
+[node name="tileset" type="Node"]
+
+[node name="FLOOR" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 85, 0, 16, 16 )
+
+[node name="WALL" type="Sprite" parent="."]
+
+transform/pos = Vector2( 16, 0 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 102, 51, 16, 16 )
+
+
