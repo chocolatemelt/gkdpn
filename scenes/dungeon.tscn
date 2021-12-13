@@ -42,5 +42,4 @@ cell_tile_origin = 1
 cell_y_sort = true
 centered_textures = true
 format = 1
-tile_data = PoolIntArray( -589820, 1, 0, -524285, 0, 0 )
 script = ExtResource( 5 )
