@@ -1,0 +1,129 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://assets/tiles/Autumn_0001.png" type="Texture" id=1]
+[ext_resource path="res://assets/tiles/Autumn_0010.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/Autumn_0011.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/Autumn_0100.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/Autumn_1000.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/Autumn_1100.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/Autumn_0101.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/Autumn_1010.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/Autumn_1111.png" type="Texture" id=9]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 0, 32, 64, 0, 128, 32 )
+polygons = [ PoolIntArray( 0, 1, 2 ) ]
+outlines = [ PoolVector2Array( 0, 32, 64, 0, 128, 32 ) ]
+
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 64, 0, 64, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2 ) ]
+outlines = [ PoolVector2Array( 64, 0, 64, 32, 0, 32 ) ]
+
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( 128, 32, 64, 32, 64, 0 )
+polygons = [ PoolIntArray( 0, 1, 2 ) ]
+outlines = [ PoolVector2Array( 64, 0, 64, 32, 128, 32 ) ]
+
+[sub_resource type="NavigationPolygon" id=4]
+vertices = PoolVector2Array( 0, 32, 128, 32, 64, 64 )
+polygons = [ PoolIntArray( 0, 1, 2 ) ]
+outlines = [ PoolVector2Array( 0, 32, 128, 32, 64, 64 ) ]
+
+[sub_resource type="NavigationPolygon" id=5]
+vertices = PoolVector2Array( 0, 32, 64, 32, 64, 64 )
+polygons = [ PoolIntArray( 0, 1, 2 ) ]
+outlines = [ PoolVector2Array( 0, 32, 64, 32, 64, 64 ) ]
+
+[sub_resource type="NavigationPolygon" id=6]
+vertices = PoolVector2Array( 64, 32, 128, 32, 64, 64 )
+polygons = [ PoolIntArray( 0, 1, 2 ) ]
+outlines = [ PoolVector2Array( 64, 32, 128, 32, 64, 64 ) ]
+
+[sub_resource type="NavigationPolygon" id=7]
+vertices = PoolVector2Array( 64, 64, 0, 32, 64, 0 )
+polygons = [ PoolIntArray( 0, 1, 2 ) ]
+outlines = [ PoolVector2Array( 64, 0, 0, 32, 64, 64 ) ]
+
+[sub_resource type="NavigationPolygon" id=8]
+vertices = PoolVector2Array( 64, 0, 128, 32, 64, 64 )
+polygons = [ PoolIntArray( 0, 1, 2 ) ]
+outlines = [ PoolVector2Array( 64, 0, 128, 32, 64, 64 ) ]
+
+[sub_resource type="NavigationPolygon" id=9]
+vertices = PoolVector2Array( 128, 32, 64, 64, 0, 32, 64, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 64, 0, 0, 32, 64, 64, 128, 32 ) ]
+
+[node name="AutumnEdit" type="Node2D"]
+
+[node name="1100" type="Sprite" parent="."]
+position = Vector2( 192, 0 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="1100"]
+navpoly = SubResource( 1 )
+
+[node name="1000" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="1000"]
+navpoly = SubResource( 2 )
+
+[node name="0100" type="Sprite" parent="."]
+position = Vector2( 32, 0 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="0100"]
+navpoly = SubResource( 3 )
+
+[node name="0011" type="Sprite" parent="."]
+position = Vector2( 192, 32 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="0011"]
+navpoly = SubResource( 4 )
+
+[node name="0010" type="Sprite" parent="."]
+position = Vector2( 0, 32 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="0010"]
+navpoly = SubResource( 5 )
+
+[node name="0001" type="Sprite" parent="."]
+position = Vector2( 32, 32 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="0001"]
+navpoly = SubResource( 6 )
+
+[node name="1010" type="Sprite" parent="."]
+position = Vector2( 0, 128 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="1010"]
+navpoly = SubResource( 7 )
+
+[node name="0101" type="Sprite" parent="."]
+position = Vector2( 32, 128 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="0101"]
+navpoly = SubResource( 8 )
+
+[node name="1111" type="Sprite" parent="."]
+position = Vector2( 192, 128 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="1111"]
+navpoly = SubResource( 9 )
