@@ -1,0 +1,39 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/platinum/PlatinumSprite11.png" type="Texture" id=1]
+[ext_resource path="res://assets/platinum/PlatinumSprite5.png" type="Texture" id=2]
+[ext_resource path="res://assets/platinum/PlatinumSprite2.png" type="Texture" id=3]
+[ext_resource path="res://assets/platinum/PlatinumSprite15.png" type="Texture" id=4]
+[ext_resource path="res://assets/platinum/PlatinumSprite4.png" type="Texture" id=5]
+[ext_resource path="res://assets/platinum/PlatinumSprite3.png" type="Texture" id=6]
+[ext_resource path="res://assets/platinum/PlatinumSprite12.png" type="Texture" id=7]
+[ext_resource path="res://assets/platinum/PlatinumSprite13.png" type="Texture" id=8]
+[ext_resource path="res://assets/platinum/PlatinumSprite16.png" type="Texture" id=9]
+[ext_resource path="res://assets/platinum/PlatinumSprite1.png" type="Texture" id=10]
+[ext_resource path="res://assets/platinum/PlatinumSprite7.png" type="Texture" id=11]
+[ext_resource path="res://assets/platinum/PlatinumSprite6.png" type="Texture" id=12]
+[ext_resource path="res://assets/platinum/PlatinumSprite9.png" type="Texture" id=13]
+[ext_resource path="res://assets/platinum/PlatinumSprite10.png" type="Texture" id=14]
+[ext_resource path="res://assets/platinum/PlatinumSprite14.png" type="Texture" id=15]
+[ext_resource path="res://assets/platinum/PlatinumSprite8.png" type="Texture" id=16]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 1 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 15 ), ExtResource( 4 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Platinum" type="Area2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -45, -81 )
+frames = SubResource( 1 )
+frame = 13
+playing = true
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -32, 0 )
+polygon = PoolVector2Array( 0, 0, 32, 16, 64, 0, 32, -16 )

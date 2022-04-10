@@ -7,4 +7,4 @@ func _process(delta):
 	pass
 
 func _on_LinkButton_button_up():
-	get_tree().change_scene("res://scenes/Dungeon.tscn")
+	get_tree().change_scene("res://scenes/FreeNav.tscn")

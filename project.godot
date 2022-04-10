@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "",
+"class": "DijkstraMap",
+"language": "NativeScript",
+"path": "res://addons/dijkstra-map/Dijkstra_map_library/nativescript.gdns"
+}, {
 "base": "Node",
 "class": "Item",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://entities/items/Modifier.gd"
 } ]
 _global_script_class_icons={
+"DijkstraMap": "",
 "Item": "",
 "Modifier": ""
 }
@@ -28,7 +34,7 @@ _global_script_class_icons={
 
 config/name="gkdpn"
 config/description="kadopon proof of concept"
-run/main_scene="res://menus/MainMenu.tscn"
+run/main_scene="res://scenes/GridNav.tscn"
 config/icon="res://assets/icon.png"
 
 [autoload]
