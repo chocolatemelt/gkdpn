@@ -13,16 +13,15 @@ onready var corner_offsets: PoolVector2Array = PoolVector2Array([
 onready var ALPHA_STEP = 0.5 / tile_map.MAX_COST
 
 
-func pos_to_corners(pos: Vector2):
+func idx_to_corners(idx: int):
+	var pos = tile_map.idx_to_pos[idx]
+	var height = tile_map.get_height_for_idx(idx)
 	var world_pos = tile_map.map_to_world(pos)
+	world_pos = Vector2(world_pos.x, world_pos.y - height)
 	var corners = PoolVector2Array()
 	for offset in corner_offsets:
 		corners.push_back(world_pos + offset)
 	return corners
-
-
-func idx_to_corners(idx: int):
-	return pos_to_corners(tile_map.idx_to_pos[idx])
 
 
 func _draw():

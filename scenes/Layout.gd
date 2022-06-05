@@ -38,13 +38,19 @@ const OFFSETS_ORDINAL: PoolVector2Array = PoolVector2Array([
 	Vector2(1, 1), # SE
 ])
 const WEIGHT_ORDINAL: float = 1.5
+const TILE_SETS = [
+	preload("res://entities/tiles/Stacks.tres"),
+	preload("res://entities/tiles/InverseStacks.tres")
+]
 
 onready var dijkstra: DijkstraMap = DijkstraMap.new()
 onready var player: Area2D = $"../Platinum"
 onready var nav_draw: Node2D = $NavDraw
 onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
 onready var cams = [$"../CamStatic", $"../CamMouse"]
-onready var cam_idx = 0;
+onready var cam_idx = 0
+
+
 
 func _ready():
 	setup_pathfinding()
@@ -63,9 +69,16 @@ func _input(event):
 				update_origin(pos)
 			elif event.button_index == BUTTON_RIGHT:
 				update_target(pos)
-	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
-		cam_idx = (cam_idx + 1) % cams.size()
-		cams[cam_idx].make_current()
+	if event is InputEventKey and event.pressed:
+		if event.scancode == KEY_SPACE:
+			cam_idx = (cam_idx + 1) % cams.size()
+			cams[cam_idx].make_current()
+		if event.scancode - KEY_0 <= TILE_SETS.size():
+			tile_set = TILE_SETS[event.scancode - KEY_0 - 1]
+
+
+func get_height_for_idx(idx: int):
+	return dijkstra.get_terrain_for_point(idx) * 10
 
 
 func adjust_mouse_position(position: Vector2):
