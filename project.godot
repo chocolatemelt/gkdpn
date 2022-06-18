@@ -34,15 +34,15 @@ _global_script_class_icons={
 
 config/name="gkdpn"
 config/description="kadopon proof of concept"
-run/main_scene="res://scenes/GridNav.tscn"
+run/main_scene="res://scenes/grid_nav.tscn"
 config/icon="res://assets/icon.png"
 
 [autoload]
 
-Data="*res://globals/Data.gd"
-Globals="*res://globals/Globals.gd"
-SaveState="*res://globals/SaveState.gd"
-Math="*res://globals/Math.gd"
+Data="*res://globals/data.gd"
+Globals="*res://globals/globals.gd"
+SaveState="*res://globals/save_state.gd"
+Math="*res://globals/math.gd"
 
 [display]
 
