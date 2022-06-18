@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/HUD2.gd" type="Script" id=1]
 [ext_resource path="res://scenes/cam_mouse.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://game/map/stacks.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/layout.gd" type="Script" id=5]
 [ext_resource path="res://scenes/grid_nav.gd" type="Script" id=6]
+[ext_resource path="res://game/interface/character/ui_character_info.tscn" type="PackedScene" id=7]
 
 [node name="Dungeon" type="Node2D"]
 
@@ -35,9 +36,9 @@ script = ExtResource( 1 )
 
 [node name="XY" type="Panel" parent="HUD"]
 margin_left = 16.0
-margin_top = 16.0
+margin_top = 667.0
 margin_right = 208.0
-margin_bottom = 96.0
+margin_bottom = 747.0
 
 [node name="World" type="Label" parent="HUD/XY"]
 margin_left = 16.0
@@ -54,6 +55,9 @@ margin_bottom = 64.0
 text = "Tile: "
 valign = 1
 
+[node name="UICharacterInfo" parent="HUD" instance=ExtResource( 7 )]
+
 [node name="Platinum" parent="." instance=ExtResource( 3 )]
 position = Vector2( 834, 122 )
 z_index = 2
+display_name = "Platinum"

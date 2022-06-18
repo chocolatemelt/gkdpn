@@ -28,18 +28,18 @@ onready var nav_draw: Node2D = $NavDraw
 onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
 onready var cams = [$"../CamStatic", $"../CamMouse"]
 onready var cam_idx = 0
-
-
+onready var ui_character_info = $"../HUD/UICharacterInfo"
+onready var player = $"../Platinum"
 
 func _ready():
 	setup_pathfinding()
+	ui_character_info.initialize(player)
 	
 func reset_player_position(player: Character):
 	update_origin(player, world_to_map(player.position))
 	player.get_node("CamFollow").position -= player.position
 
 func _input(event):
-	var player = $"../Platinum"
 	if event is InputEventMouseButton and event.pressed:
 		var pos = world_to_map(adjust_mouse_position(event.position))
 		if pos_to_idx.has(pos):

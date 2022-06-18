@@ -5,7 +5,6 @@ class_name Character
 signal died(character)
 
 
-export var stats: Resource
 onready var actions = $Actions
 onready var skills = $Skills
 onready var ai = $AI
@@ -14,15 +13,15 @@ var target_global_position: Vector2
 
 var selected: bool = false setget set_selected
 var selectable: bool = false setget set_selectable
-var display_name: String
 
+export var display_name: String
+export var stats: Resource
 export var party_member = false
 export var turn_order_icon: Texture
 
 
 func _ready() -> void:
 	selectable = true
-	print(stats.max_life)
 	
 
 func initialize():
