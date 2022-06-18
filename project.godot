@@ -9,10 +9,35 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://game/character/character.gd"
+}, {
+"base": "Position2D",
+"class": "CharacterAnim",
+"language": "GDScript",
+"path": "res://game/animation/character_animation.gd"
+}, {
+"base": "Resource",
+"class": "CharacterStats",
+"language": "GDScript",
+"path": "res://game/character/stats/character_stats.gd"
+}, {
+"base": "Node",
+"class": "CombatAction",
+"language": "GDScript",
+"path": "res://game/character/actions/combat_action.gd"
+}, {
 "base": "",
 "class": "DijkstraMap",
 "language": "NativeScript",
 "path": "res://addons/dijkstra-map/Dijkstra_map_library/nativescript.gdns"
+}, {
+"base": "Reference",
+"class": "Hit",
+"language": "GDScript",
+"path": "res://game/combat/hit.gd"
 }, {
 "base": "Node",
 "class": "Item",
@@ -23,11 +48,34 @@ _global_script_classes=[ {
 "class": "Modifier",
 "language": "GDScript",
 "path": "res://entities/items/Modifier.gd"
+}, {
+"base": "Resource",
+"class": "Skill",
+"language": "GDScript",
+"path": "res://game/character/skills/skill.gd"
+}, {
+"base": "CombatAction",
+"class": "SkillAction",
+"language": "GDScript",
+"path": "res://game/character/actions/skill_action.gd"
+}, {
+"base": "Node",
+"class": "TurnQueue",
+"language": "GDScript",
+"path": "res://game/turn_queue/turn_queue.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
+"CharacterAnim": "",
+"CharacterStats": "",
+"CombatAction": "",
 "DijkstraMap": "",
+"Hit": "",
 "Item": "",
-"Modifier": ""
+"Modifier": "",
+"Skill": "",
+"SkillAction": "",
+"TurnQueue": ""
 }
 
 [application]
@@ -50,6 +98,10 @@ window/size/width=1366
 window/size/height=768
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/rect_extents_2D/plugin.cfg" )
 
 [gdnative]
 

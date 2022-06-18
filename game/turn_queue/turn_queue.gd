@@ -1,16 +1,13 @@
 extends Node
 
+class_name TurnQueue
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var active_character
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func initialized():
+	active_character = get_child(0)
+	
+func play_turn():
+	yield(active_character.play_turn(), "completed")
+	var new_index : int = (active_character.get_index() + 1) % get_child_count()
+	active_character = get_child(new_index)
