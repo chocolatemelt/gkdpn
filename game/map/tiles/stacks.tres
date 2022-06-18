@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=2 format=2]
+[gd_resource type="TileSet" load_steps=3 format=2]
 
-[ext_resource path="res://assets/tiles/Autumn/h10.png" type="Texture" id=1]
+[ext_resource path="res://game/map/tiles/tiles.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/Stacks/h10.png" type="Texture" id=3]
 
 [resource]
 0/name = "H10"
-0/texture = ExtResource( 1 )
+0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 128, 72 )
@@ -17,3 +18,7 @@
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
+script = ExtResource( 1 )
+terrain_weights = {
+0: 1.0
+}

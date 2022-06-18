@@ -6,6 +6,7 @@ var pos_count: int = 0
 var origin: int = 0
 var target: int = 0
 
+
 # directions
 const OFFSETS_CARDINAL: PoolVector2Array = PoolVector2Array([
 	Vector2(0, -1), # N
@@ -26,31 +27,11 @@ const WEIGHT_ORDINAL: float = 1.5
 onready var dijkstra: DijkstraMap = DijkstraMap.new()
 onready var nav_draw: Node2D = $NavDraw
 onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
-onready var cams = [$"../CamStatic", $"../CamMouse"]
-onready var cam_idx = 0
 
 
-
-func _ready():
-	setup_pathfinding()
-	
 func reset_player_position(player: Character):
 	update_origin(player, world_to_map(player.position))
 	player.get_node("CamFollow").position -= player.position
-
-func _input(event):
-	var player = $"../Platinum"
-	if event is InputEventMouseButton and event.pressed:
-		var pos = world_to_map(adjust_mouse_position(event.position))
-		if pos_to_idx.has(pos):
-			if event.button_index == BUTTON_LEFT:
-				player.position = update_origin(player, pos)
-			elif event.button_index == BUTTON_RIGHT:
-				update_target(pos)
-
-
-func adjust_mouse_position(position: Vector2) -> Vector2:
-	return position + cams[cam_idx].get_camera_position()
 
 
 func pos_to_world(pos: Vector2) -> Vector2:
