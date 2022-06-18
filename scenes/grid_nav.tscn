@@ -1,27 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/HUD2.gd" type="Script" id=1]
 [ext_resource path="res://scenes/cam_mouse.gd" type="Script" id=2]
 [ext_resource path="res://game/character/default_character.tscn" type="PackedScene" id=3]
-[ext_resource path="res://game/map/stacks.tres" type="TileSet" id=4]
-[ext_resource path="res://scenes/layout.gd" type="Script" id=5]
-[ext_resource path="res://scenes/grid_nav.gd" type="Script" id=6]
+[ext_resource path="res://game/map/layout.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/interface/character/ui_character_info.tscn" type="PackedScene" id=7]
 
 [node name="Dungeon" type="Node2D"]
 
-[node name="Layout" type="TileMap" parent="."]
-mode = 1
-tile_set = ExtResource( 4 )
-cell_size = Vector2( 128, 64 )
-cell_tile_origin = 1
-format = 1
-tile_data = PoolIntArray( -327672, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 0, 0, -131062, 0, 0, -131061, 0, 0, -131060, 0, 0, -131059, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0 )
-script = ExtResource( 5 )
-
-[node name="NavDraw" type="Node2D" parent="Layout"]
-z_index = 1
-script = ExtResource( 6 )
+[node name="Layout" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( -327672, 0, 0, -262136, 0, 0, -196600, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 0, 0, -131062, 0, 0, -131061, 0, 0, -65528, 0, 0, 8, 0, 0, 65544, 0, 0 )
 
 [node name="CamStatic" type="Camera2D" parent="."]
 anchor_mode = 0
