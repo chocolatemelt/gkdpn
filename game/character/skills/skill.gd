@@ -10,4 +10,3 @@ export var icon: Texture
 
 export var mana_cost: int
 export var base_damage: int
-export (float, 0.0, 1.0) var success_chance: float

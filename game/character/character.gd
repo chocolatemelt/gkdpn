@@ -22,6 +22,7 @@ export var turn_order_icon: Texture
 
 func _ready() -> void:
 	selectable = true
+	print(stats.max_life)
 	
 
 func initialize():

@@ -4,3 +4,9 @@
 
 [resource]
 script = ExtResource( 1 )
+max_life = 1
+max_mana = 0
+attack_damage = 1
+spell_damage = 0
+defense = 1
+speed = 1

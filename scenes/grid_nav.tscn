@@ -56,6 +56,3 @@ valign = 1
 
 [node name="Platinum" parent="." instance=ExtResource( 3 )]
 position = Vector2( 834, 122 )
-
-[node name="CamFollow" type="Camera2D" parent="Platinum"]
-position = Vector2( -834, -122 )

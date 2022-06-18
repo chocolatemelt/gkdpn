@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/character/skills/skills.gd" type="Script" id=1]
+
+[node name="Skills" type="Node"]
+script = ExtResource( 1 )

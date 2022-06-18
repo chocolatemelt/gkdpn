@@ -58,7 +58,7 @@ func _ready():
 	# trial()
 	dijkstra.recalculate(origin, DIJKSTRA_PARAMS)
 	update_origin(world_to_map(player.position))
-	$"../Platinum/CamFollow".position -= player.position
+	# $"../Platinum/CamFollow".position -= player.position
 
 
 func _input(event):
