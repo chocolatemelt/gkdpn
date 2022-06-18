@@ -1,6 +1,7 @@
 extends Node2D
 
-var cost_map: Dictionary = {} setget _set_cost_map
+var cost_map: Dictionary = {}
+var alpha_step: float = 0.1
 var path: PoolIntArray = PoolIntArray() setget _set_path
 
 onready var tile_map: TileMap = get_parent()
@@ -10,14 +11,13 @@ onready var corner_offsets: PoolVector2Array = PoolVector2Array([
 	Vector2(0, tile_map.cell_size.y),
 	Vector2(-tile_map.cell_size.x / 2, tile_map.cell_size.y / 2),
 ])
-onready var ALPHA_STEP = 0.5 / tile_map.MAX_COST
+
 
 
 func idx_to_corners(idx: int):
 	var pos = tile_map.idx_to_pos[idx]
-	var height = tile_map.get_height_for_idx(idx)
 	var world_pos = tile_map.map_to_world(pos)
-	world_pos = Vector2(world_pos.x, world_pos.y - height)
+	world_pos = Vector2(world_pos.x, world_pos.y)
 	var corners = PoolVector2Array()
 	for offset in corner_offsets:
 		corners.push_back(world_pos + offset)
@@ -41,10 +41,13 @@ func _draw():
 		draw_circle(prev_pos, 16.0, Color.blue)
 
 	for idx in cost_map.keys():
-		draw_colored_polygon(idx_to_corners(idx), Color(1, 0, 0, ALPHA_STEP * cost_map[idx]))
+		draw_colored_polygon(idx_to_corners(idx), Color(1, 0, 0, alpha_step * cost_map[idx]))
 
-func _set_cost_map(value: Dictionary):
-	cost_map = value
+
+func update_params(costs: Dictionary, movement: int):
+	cost_map = costs
+	alpha_step = 1.0 / (movement * 2)
+	print(costs)
 	path = PoolIntArray()
 	update()
 

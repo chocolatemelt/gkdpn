@@ -18,6 +18,7 @@ export var attack_damage: int = 1 setget , _get_attack_damage
 export var spell_damage: int = 0 setget , _get_spell_damage
 export var defense: int = 1 setget , _get_defense
 export var speed: int = 1 setget , _get_speed
+export var movement: float = 4.0 setget, _get_movement
 var is_alive: bool setget , _is_alive
 
 
@@ -100,6 +101,8 @@ func _get_spell_damage() -> int:
 func _get_defense() -> int:
 	return defense
 
-
 func _get_speed() -> int:
 	return speed
+
+func _get_movement() -> float:
+	return movement

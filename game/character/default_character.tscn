@@ -32,6 +32,5 @@ party_member = true
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2( -45, -81 )
 frames = SubResource( 1 )
-frame = 9
 playing = true
 centered = false

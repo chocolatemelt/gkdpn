@@ -6,23 +6,6 @@ var pos_count: int = 0
 var origin: int = 0
 var target: int = 0
 
-# terrain, should make dynamic instead
-const TERRAIN_H10: int = 0
-const TERRAIN_H20: int = 1
-const TERRAIN_H30: int = 2
-const TERRAINS: Dictionary = {
-	TERRAIN_H10: 1,
-	TERRAIN_H20: 1,
-	TERRAIN_H30: 1,
-}
-
-const MAX_COST: float = 4.0
-
-const DIJKSTRA_PARAMS: Dictionary = {
-	'maximum_cost': MAX_COST,
-	'terrain_weights': TERRAINS
-}
-
 # directions
 const OFFSETS_CARDINAL: PoolVector2Array = PoolVector2Array([
 	Vector2(0, -1), # N
@@ -38,13 +21,9 @@ const OFFSETS_ORDINAL: PoolVector2Array = PoolVector2Array([
 	Vector2(1, 1), # SE
 ])
 const WEIGHT_ORDINAL: float = 1.5
-const TILE_SETS = [
-	preload("res://entities/tiles/Stacks.tres"),
-	preload("res://entities/tiles/InverseStacks.tres")
-]
+
 
 onready var dijkstra: DijkstraMap = DijkstraMap.new()
-onready var player: Area2D = $"../Platinum"
 onready var nav_draw: Node2D = $NavDraw
 onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
 onready var cams = [$"../CamStatic", $"../CamMouse"]
@@ -54,66 +33,59 @@ onready var cam_idx = 0
 
 func _ready():
 	setup_pathfinding()
-	# test
-	# trial()
-	dijkstra.recalculate(origin, DIJKSTRA_PARAMS)
-	update_origin(world_to_map(player.position))
-	# $"../Platinum/CamFollow".position -= player.position
-
+	
+func reset_player_position(player: Character):
+	update_origin(player, world_to_map(player.position))
+	player.get_node("CamFollow").position -= player.position
 
 func _input(event):
+	var player = $"../Platinum"
 	if event is InputEventMouseButton and event.pressed:
 		var pos = world_to_map(adjust_mouse_position(event.position))
 		if pos_to_idx.has(pos):
 			if event.button_index == BUTTON_LEFT:
-				update_origin(pos)
+				player.position = update_origin(player, pos)
 			elif event.button_index == BUTTON_RIGHT:
 				update_target(pos)
-	if event is InputEventKey and event.pressed:
-		if event.scancode == KEY_SPACE:
-			cam_idx = (cam_idx + 1) % cams.size()
-			cams[cam_idx].make_current()
-		if event.scancode - KEY_0 <= TILE_SETS.size():
-			tile_set = TILE_SETS[event.scancode - KEY_0 - 1]
 
 
-func get_height_for_idx(idx: int):
-	return dijkstra.get_terrain_for_point(idx) * 10
-
-
-func adjust_mouse_position(position: Vector2):
+func adjust_mouse_position(position: Vector2) -> Vector2:
 	return position + cams[cam_idx].get_camera_position()
 
 
-func pos_to_world(pos: Vector2):
+func pos_to_world(pos: Vector2) -> Vector2:
 	return map_to_world(pos) + cell_offset
 
 
-func idx_to_world(idx: int):
+func idx_to_world(idx: int) -> Vector2:
 	return pos_to_world(idx_to_pos[idx])
 
 
-func update_origin(pos: Vector2):
+func update_origin(player: Character, pos: Vector2):
 	origin = pos_to_idx[pos]
-	dijkstra.recalculate(origin, DIJKSTRA_PARAMS)
-	player.position = pos_to_world(pos)
+	dijkstra.recalculate(origin, {
+		'maximum_cost': player.stats.movement,
+		'terrain_weights': tile_set.terrain_weights
+	})
 	# draw nav area
-	nav_draw.cost_map = dijkstra.get_cost_map()
+	nav_draw.update_params(dijkstra.get_cost_map(), player.stats.movement)
+	return pos_to_world(pos)
 
 
-func update_target(pos: Vector2):
+func update_target(pos: Vector2) -> PoolIntArray:
 	target = pos_to_idx[pos]
 	var path = dijkstra.get_shortest_path_from_point(target)
 	path.invert()
 	path.push_back(target)
 	nav_draw.path = path
+	return path
 
 
 func setup_pathfinding():
 	dijkstra.clear()
 	var pos_idx = 0
 	# add points
-	for terrain_id in TERRAINS.keys():
+	for terrain_id in tile_set.get_tiles_ids():
 		for pos in get_used_cells_by_id(terrain_id):
 			idx_to_pos[pos_idx] = pos
 			pos_to_idx[pos] = pos_idx

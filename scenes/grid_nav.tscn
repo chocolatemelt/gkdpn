@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/hud2.gd" type="Script" id=1]
+[ext_resource path="res://scenes/HUD2.gd" type="Script" id=1]
 [ext_resource path="res://scenes/cam_mouse.gd" type="Script" id=2]
 [ext_resource path="res://game/character/default_character.tscn" type="PackedScene" id=3]
-[ext_resource path="res://entities/tiles/Stacks.tres" type="TileSet" id=4]
+[ext_resource path="res://game/map/stacks.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/layout.gd" type="Script" id=5]
 [ext_resource path="res://scenes/grid_nav.gd" type="Script" id=6]
 
@@ -56,3 +56,4 @@ valign = 1
 
 [node name="Platinum" parent="." instance=ExtResource( 3 )]
 position = Vector2( 834, 122 )
+z_index = 2
