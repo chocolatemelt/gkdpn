@@ -1,5 +1,7 @@
 extends TileMap
 
+class_name Layout
+
 var idx_to_pos: Dictionary = {}
 var pos_to_idx: Dictionary = {}
 var pos_count: int = 0
@@ -29,8 +31,24 @@ onready var nav_draw: Node2D = $NavDraw
 onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
 
 
-func reset_player_position(player: Character):
-	update_origin(player, world_to_map(player.position))
+func _ready():
+	setup_pathfinding()
+
+
+func mouse_update_origin(player: Character, position: Vector2):
+	var pos = world_to_map(position)
+	if pos_to_idx.has(pos):
+		player.position = update_origin(player, pos)
+
+
+func mouse_update_target(position: Vector2):
+	var pos = world_to_map(position)
+	if pos_to_idx.has(pos):
+		update_target(pos)
+
+
+func spawn(player: Character, pos: Vector2):
+	player.position = update_origin(player, pos)
 	player.get_node("CamFollow").position -= player.position
 
 

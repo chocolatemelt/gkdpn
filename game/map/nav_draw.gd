@@ -26,7 +26,6 @@ func idx_to_corners(idx: int):
 
 func _draw():
 	if path.size() > 1:
-		print(path)
 		var prev_pos = tile_map.idx_to_world(path[0])
 		for i in range(1, path.size()):
 			var curr_pos = tile_map.idx_to_world(path[i])
@@ -47,7 +46,6 @@ func _draw():
 func update_params(costs: Dictionary, movement: int):
 	cost_map = costs
 	alpha_step = 1.0 / (movement * 2)
-	print(costs)
 	path = PoolIntArray()
 	update()
 

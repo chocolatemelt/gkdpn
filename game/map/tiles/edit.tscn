@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/tiles/h00.png" type="Texture" id=1]
+[ext_resource path="res://assets/tiles/Autumn/h10.png" type="Texture" id=2]
+
+[node name="Tiles" type="Node2D"]
+
+[node name="H00" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="H10" type="Sprite" parent="."]
+position = Vector2( 144, 0 )
+texture = ExtResource( 2 )
+centered = false

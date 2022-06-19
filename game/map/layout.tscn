@@ -1,12 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://game/map/nav_draw.gd" type="Script" id=1]
 [ext_resource path="res://game/map/layout.gd" type="Script" id=2]
-[ext_resource path="res://game/map/tiles/stacks.tres" type="TileSet" id=3]
 
 [node name="Layout" type="TileMap"]
 mode = 1
-tile_set = ExtResource( 3 )
 cell_size = Vector2( 128, 64 )
 format = 1
 script = ExtResource( 2 )

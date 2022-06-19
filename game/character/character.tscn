@@ -20,3 +20,5 @@ script = ExtResource( 2 )
 [node name="Skills" type="Node" parent="."]
 
 [node name="AI" type="Node" parent="."]
+
+[node name="CamFollow" type="Camera2D" parent="."]
