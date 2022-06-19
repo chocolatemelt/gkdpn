@@ -7,6 +7,7 @@ var characters: Array = []
 
 var current_room: Layout
 var current_character: Character
+var current_camera: Camera2D setget ,_get_current_camera
 
 func _ready():
 	var dir = Directory.new()
@@ -35,10 +36,32 @@ func _input(event):
 			switch_to_room(event.scancode - KEY_0 - 1)
 
 	if event is InputEventMouseButton and event.pressed:
+		var adj_position = adjust_mouse_position(event.position)
 		if event.button_index == BUTTON_LEFT:
-			current_room.mouse_update_origin(current_character, event.position)
+			current_room.mouse_update_origin(current_character, adj_position)
 		elif event.button_index == BUTTON_RIGHT:
-			current_room.mouse_update_target(event.position)
+			current_room.mouse_update_target(adj_position)
+
+
+func _get_current_camera():
+	if current_camera and current_camera.current:
+		return current_camera
+	else:
+		# dumb workaround to get current camera in 2D context
+		var viewport = get_viewport()
+		if not viewport:
+			return null
+		var camerasGroupName = "__cameras_%d" % viewport.get_viewport_rid().get_id()
+		var cameras = get_tree().get_nodes_in_group(camerasGroupName)
+		for camera in cameras:
+			if camera is Camera2D and camera.current: 
+				current_camera = camera
+				return camera
+		return null
+
+
+func adjust_mouse_position(position: Vector2):
+	return position + _get_current_camera().position
 
 
 func switch_to_room(idx: int):
