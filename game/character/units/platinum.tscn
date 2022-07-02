@@ -1,0 +1,40 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/platinum/PlatinumSprite3.png" type="Texture" id=1]
+[ext_resource path="res://assets/platinum/PlatinumSprite11.png" type="Texture" id=2]
+[ext_resource path="res://assets/platinum/PlatinumSprite14.png" type="Texture" id=3]
+[ext_resource path="res://assets/platinum/PlatinumSprite5.png" type="Texture" id=4]
+[ext_resource path="res://assets/platinum/PlatinumSprite9.png" type="Texture" id=5]
+[ext_resource path="res://assets/platinum/PlatinumSprite4.png" type="Texture" id=6]
+[ext_resource path="res://assets/platinum/PlatinumSprite10.png" type="Texture" id=7]
+[ext_resource path="res://assets/platinum/PlatinumSprite1.png" type="Texture" id=8]
+[ext_resource path="res://assets/platinum/PlatinumSprite12.png" type="Texture" id=9]
+[ext_resource path="res://assets/platinum/PlatinumSprite16.png" type="Texture" id=10]
+[ext_resource path="res://assets/platinum/PlatinumSprite2.png" type="Texture" id=11]
+[ext_resource path="res://assets/platinum/PlatinumSprite15.png" type="Texture" id=12]
+[ext_resource path="res://assets/platinum/PlatinumSprite6.png" type="Texture" id=13]
+[ext_resource path="res://assets/platinum/PlatinumSprite13.png" type="Texture" id=14]
+[ext_resource path="res://assets/platinum/PlatinumSprite7.png" type="Texture" id=15]
+[ext_resource path="res://assets/platinum/PlatinumSprite8.png" type="Texture" id=16]
+[ext_resource path="res://game/character/character.tscn" type="PackedScene" id=17]
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 33, 20, 20, 20 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 11 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 3 ), ExtResource( 12 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[node name="Character" instance=ExtResource( 17 )]
+party_member = true
+turn_order_icon = SubResource( 2 )
+
+[node name="AnimatedSprite" parent="." index="0"]
+position = Vector2( -45, -81 )
+frames = SubResource( 1 )

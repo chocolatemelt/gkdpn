@@ -35,13 +35,13 @@ func _ready():
 	setup_pathfinding()
 
 
-func mouse_update_origin(player: Character, position: Vector2):
+func world_update_origin(player: Character, position: Vector2):
 	var pos = world_to_map(position)
 	if pos_to_idx.has(pos):
 		player.position = update_origin(player, pos)
 
 
-func mouse_update_target(position: Vector2):
+func world_update_target(position: Vector2):
 	var pos = world_to_map(position)
 	if pos_to_idx.has(pos):
 		update_target(pos)

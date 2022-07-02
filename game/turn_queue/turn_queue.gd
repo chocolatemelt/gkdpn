@@ -1,13 +1,33 @@
-extends Node
+extends HBoxContainer
+
 
 class_name TurnQueue
 
-var active_character
+var _characters: Array
+var _active: int
+var active_character: Character setget ,_get_active
+var turn_icons: Array = []
 
-func initialized():
-	active_character = get_child(0)
-	
+func setup(characters: Array, active: int=0):
+	for prev_icon in turn_icons:
+		# may need to type check here?
+		remove_child(prev_icon)
+		prev_icon.call_deferred("free")
+	turn_icons = []
+	_characters = characters
+	_active = active
+	for chara in _characters:
+		var turn_icon = TextureRect.new()
+		turn_icon.texture = chara.turn_order_icon
+		add_child(turn_icon)
+		turn_icons.append(turn_icon)
+	$"/root/Game".current_room.world_update_origin(_get_active(), _get_active().position)
+
 func play_turn():
-	yield(active_character.play_turn(), "completed")
-	var new_index : int = (active_character.get_index() + 1) % get_child_count()
-	active_character = get_child(new_index)
+	# yield(_get_active().play_turn(), "completed")
+	move_child(turn_icons[_active], _characters.size()-1)
+	_active = (_active + 1) % _characters.size()
+	$"/root/Game".current_room.world_update_origin(_get_active(), _get_active().position)
+
+func _get_active():
+	return _characters[_active]

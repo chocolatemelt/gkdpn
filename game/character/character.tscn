@@ -5,10 +5,13 @@
 [ext_resource path="res://game/character/stats/default_stats.tres" type="Resource" id=3]
 
 [node name="Character" type="Area2D"]
+z_index = 2
 script = ExtResource( 1 )
 stats = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+playing = true
+centered = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -32, 0 )

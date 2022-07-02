@@ -1,46 +1,41 @@
 extends Node2D
 
 
-var rooms: Array = []
+var rooms: Array
 var characters: Array = []
 
 
-var current_room: Layout
-var current_character: Character
+var current_room: Layout = null
 var current_camera: Camera2D setget ,_get_current_camera
 
-func _ready():
-	var dir = Directory.new()
-	var rooms_dir = "res://game/map/rooms"
-	if dir.open(rooms_dir) == OK:
-		dir.list_dir_begin()
-		while true:
-			var file_name = dir.get_next()
-			if file_name == "":
-				# break the while loop when get_next() returns ""
-				break
-			elif !dir.current_is_dir() and file_name.ends_with(".tscn"):
-				rooms.append(rooms_dir + "/" + file_name)
-		dir.list_dir_end()
-	rooms.sort()
+onready var turn_queue: TurnQueue = $Overlay/TurnQueue
 
-	# put characters under some folder later
-	var character_resource = load("res://game/character/default_character.tscn")
-	characters.append(character_resource.instance())
-	switch_to_room(0)
+func _ready():
+
+	rooms = _get_resources("res://game/map/rooms", ".tscn")
+	for idx in range(rooms.size()):
+		$Overlay/Debug/Map/MapSelect.add_item(rooms[idx].rsplit("/", false, 1)[1].split(".", true, 1)[0])
+
+	for character_path in _get_resources("res://game/character/units", ".tscn"):
+		var character_resource = load(character_path)
+		characters.append(character_resource.instance())
+
+	switch_to_room(2)
 
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
-		if event.scancode - KEY_0 <= rooms.size():
-			switch_to_room(event.scancode - KEY_0 - 1)
+#		if event.scancode - KEY_0 <= rooms.size():
+#			switch_to_room(event.scancode - KEY_0 - 1)
+		if event.scancode == KEY_SPACE:
+			turn_queue.play_turn()
 
 	if event is InputEventMouseButton and event.pressed:
 		var adj_position = adjust_mouse_position(event.position)
 		if event.button_index == BUTTON_LEFT:
-			current_room.mouse_update_origin(current_character, adj_position)
+			current_room.world_update_origin(turn_queue.active_character, adj_position)
 		elif event.button_index == BUTTON_RIGHT:
-			current_room.mouse_update_target(adj_position)
+			current_room.world_update_target(adj_position)
 
 
 func _get_current_camera():
@@ -60,27 +55,43 @@ func _get_current_camera():
 		return null
 
 
+func _get_resources(dir_path: String, ext: String):
+	var dir = Directory.new()
+	var resource_list = []
+	if dir.open(dir_path) == OK:
+		dir.list_dir_begin()
+		while true:
+			var file_name = dir.get_next()
+			if file_name == "":
+				# break the while loop when get_next() returns ""
+				break
+			elif !dir.current_is_dir() and file_name.ends_with(ext):
+				resource_list.append(dir_path + "/" + file_name)
+		dir.list_dir_end()
+		resource_list.sort()
+	return resource_list
+
+
 func adjust_mouse_position(position: Vector2):
 	return position + _get_current_camera().position
 
 
 func switch_to_room(idx: int):
-	print("room ", idx)
 	if idx < rooms.size():
-		var room = get_node("Layout")
-		if room:
+		if current_room:
 			for character in characters:
-				room.remove_child(character)
-			remove_child(room)
-			room.call_deferred("free")
+				current_room.remove_child(character)
+			remove_child(current_room)
+			current_room.call_deferred("free")
 
 		var room_resource = load(rooms[idx])
 		current_room = room_resource.instance()
 		add_child(current_room)
 
+		var spawn_tiles = current_room.get_used_cells_by_id(0)
+		spawn_tiles.sort()
 		for idx in characters.size():
 			var character = characters[idx]
 			current_room.add_child(character)
-			current_room.spawn(character, current_room.get_used_cells_by_id(0)[idx])
-		current_character = characters[0]
-
+			current_room.spawn(character, spawn_tiles[idx])
+		turn_queue.setup(characters, 0)
