@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/cam_mouse.gd" type="Script" id=2]
 [ext_resource path="res://scenes/debug.gd" type="Script" id=3]
 [ext_resource path="res://game/turn_queue/turn_queue.gd" type="Script" id=4]
+[ext_resource path="res://game/interface/character/character_info.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -59,6 +60,13 @@ margin_left = 34.0
 margin_top = 28.0
 margin_right = 74.0
 margin_bottom = 68.0
+rect_scale = Vector2( 3, 3 )
 script = ExtResource( 4 )
+
+[node name="CharacterInfo" parent="Overlay" instance=ExtResource( 5 )]
+margin_left = 236.0
+margin_top = 663.0
+margin_right = 460.0
+margin_bottom = 745.0
 
 [connection signal="item_selected" from="Overlay/Debug/Map/MapSelect" to="." method="switch_to_room"]

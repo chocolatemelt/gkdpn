@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/platinum/PlatinumSprite3.png" type="Texture" id=1]
 [ext_resource path="res://assets/platinum/PlatinumSprite11.png" type="Texture" id=2]
@@ -17,6 +17,17 @@
 [ext_resource path="res://assets/platinum/PlatinumSprite7.png" type="Texture" id=15]
 [ext_resource path="res://assets/platinum/PlatinumSprite8.png" type="Texture" id=16]
 [ext_resource path="res://game/character/character.tscn" type="PackedScene" id=17]
+[ext_resource path="res://game/character/stats/character_stats.gd" type="Script" id=18]
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 18 )
+max_life = 100
+max_mana = 25
+attack_damage = 100
+spell_damage = 10
+defense = 80
+speed = 40
+movement = 4.0
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -32,9 +43,12 @@ animations = [ {
 } ]
 
 [node name="Character" instance=ExtResource( 17 )]
+display_name = "Platinum"
+stats = SubResource( 3 )
 party_member = true
 turn_order_icon = SubResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2( -45, -81 )
 frames = SubResource( 1 )
+frame = 13

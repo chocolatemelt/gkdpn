@@ -1,13 +1,15 @@
+class_name Layout
 extends TileMap
 
-class_name Layout
+signal movement_done
 
 var idx_to_pos: Dictionary = {}
 var pos_to_idx: Dictionary = {}
 var pos_count: int = 0
 var origin: int = 0
 var target: int = 0
-
+var prepared_character: Character
+var prepared_path: PoolIntArray
 
 # directions
 const OFFSETS_CARDINAL: PoolVector2Array = PoolVector2Array([
@@ -24,7 +26,8 @@ const OFFSETS_ORDINAL: PoolVector2Array = PoolVector2Array([
 	Vector2(1, 1), # SE
 ])
 const WEIGHT_ORDINAL: float = 1.5
-
+# move anim speed in pixel/s
+const ANIM_SPEED = 250
 
 onready var dijkstra: DijkstraMap = DijkstraMap.new()
 onready var nav_draw: Node2D = $NavDraw
@@ -33,12 +36,13 @@ onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
 
 func _ready():
 	setup_pathfinding()
+	set_physics_process(false)
 
 
 func world_update_origin(player: Character, position: Vector2):
 	var pos = world_to_map(position)
 	if pos_to_idx.has(pos):
-		player.position = update_origin(player, pos)
+		update_origin(player, pos)
 
 
 func world_update_target(position: Vector2):
@@ -48,7 +52,7 @@ func world_update_target(position: Vector2):
 
 
 func spawn(player: Character, pos: Vector2):
-	player.position = update_origin(player, pos)
+	update_origin(player, pos)
 	player.get_node("CamFollow").position -= player.position
 
 
@@ -61,6 +65,8 @@ func idx_to_world(idx: int) -> Vector2:
 
 
 func update_origin(player: Character, pos: Vector2):
+	if is_physics_processing():
+		return
 	origin = pos_to_idx[pos]
 	dijkstra.recalculate(origin, {
 		'maximum_cost': player.stats.movement,
@@ -68,17 +74,47 @@ func update_origin(player: Character, pos: Vector2):
 	})
 	# draw nav area
 	nav_draw.update_params(dijkstra.get_cost_map(), player.stats.movement)
-	return pos_to_world(pos)
+	prepared_character = player
+	player.position = pos_to_world(pos)
 
 
-func update_target(pos: Vector2) -> PoolIntArray:
+func update_target(pos: Vector2):
+	if is_physics_processing():
+		return
 	target = pos_to_idx[pos]
 	var path = dijkstra.get_shortest_path_from_point(target)
 	path.invert()
 	path.push_back(target)
 	nav_draw.path = path
-	return path
+	prepared_path = path
+	return
 
+
+func move_character():
+	if prepared_path.size() > 1:
+		set_physics_process(true)
+
+
+func _physics_process(delta):
+	if prepared_path.size() > 0:
+		if move_to(pos_to_world(idx_to_pos[prepared_path[0]]), delta):
+			prepared_path.remove(0)
+	else:
+		set_physics_process(false)
+		world_update_origin(prepared_character, prepared_character.position)
+		emit_signal("movement_done")
+
+
+func move_to(target: Vector2, delta: float) -> bool:
+	var distance: float = prepared_character.position.distance_to(target)
+	if distance > 10:
+		prepared_character.position = prepared_character.position.linear_interpolate(
+			target, (ANIM_SPEED * delta)/distance
+		)
+		return false
+	else:
+		prepared_character.position = target
+		return true
 
 func setup_pathfinding():
 	dijkstra.clear()

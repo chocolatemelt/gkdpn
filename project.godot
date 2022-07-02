@@ -83,11 +83,6 @@ _global_script_classes=[ {
 "class": "TurnQueue",
 "language": "GDScript",
 "path": "res://game/turn_queue/turn_queue.gd"
-}, {
-"base": "CanvasLayer",
-"class": "UICharacterInfo",
-"language": "GDScript",
-"path": "res://game/interface/character/ui_character_info.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -104,8 +99,7 @@ _global_script_class_icons={
 "Party": "",
 "Skill": "",
 "SkillAction": "",
-"TurnQueue": "",
-"UICharacterInfo": ""
+"TurnQueue": ""
 }
 
 [application]
