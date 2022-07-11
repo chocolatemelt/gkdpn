@@ -38,3 +38,4 @@ terrain_weights = {
 0: 1.0,
 1: 2.0
 }
+spawn_tile_id = 0

@@ -97,7 +97,7 @@ func switch_to_room(idx: int):
 		current_room.connect("movement_done", turn_queue, "next_turn")
 		add_child(current_room)
 
-		var spawn_tiles = current_room.get_used_cells_by_id(0)
+		var spawn_tiles = current_room.get_spawn_tiles()
 		spawn_tiles.sort()
 		for idx in characters.size():
 			var character = characters[idx]

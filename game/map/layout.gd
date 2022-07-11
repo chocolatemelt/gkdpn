@@ -51,6 +51,10 @@ func world_update_target(position: Vector2):
 		update_target(pos)
 
 
+func get_spawn_tiles():
+	return get_used_cells_by_id(tile_set.spawn_tile_id)
+
+
 func spawn(player: Character, pos: Vector2):
 	update_origin(player, pos)
 	player.get_node("CamFollow").position -= player.position
