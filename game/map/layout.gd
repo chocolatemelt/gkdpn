@@ -139,18 +139,18 @@ func setup_pathfinding():
 			var to_pos = pos + offset
 			if not pos_to_idx.has(to_pos):
 				continue
-			if wall.has_wall(pos, offset):
+			if wall.passable(pos, offset):
 				continue
-			dijkstra.connect_points(idx, pos_to_idx[to_pos], WEIGHT_CARDINAL, true)
+			dijkstra.connect_points(pos_to_idx[to_pos], idx, WEIGHT_CARDINAL, false)
 		for offset in OFFSETS_ORDINAL:
 			var to_pos = pos + offset
 			if not pos_to_idx.has(to_pos):
 				continue
-			if wall.has_wall(pos, offset):
+			if wall.passable(pos, offset):
 				continue
 			# only allow the connection if both related cardinal direction tiles are filled
 			if not pos_to_idx.has(Vector2(pos.x + offset.x, pos.y)):
 				continue
 			if not pos_to_idx.has(Vector2(pos.x, pos.y + offset.y)):
 				continue
-			dijkstra.connect_points(idx, pos_to_idx[to_pos], WEIGHT_ORDINAL, true)
+			dijkstra.connect_points(pos_to_idx[to_pos], idx, WEIGHT_ORDINAL, false)
