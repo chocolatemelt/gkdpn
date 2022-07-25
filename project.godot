@@ -83,6 +83,11 @@ _global_script_classes=[ {
 "class": "TurnQueue",
 "language": "GDScript",
 "path": "res://game/turn_queue/turn_queue.gd"
+}, {
+"base": "TileMap",
+"class": "Wall",
+"language": "GDScript",
+"path": "res://game/map/wall.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -99,7 +104,8 @@ _global_script_class_icons={
 "Party": "",
 "Skill": "",
 "SkillAction": "",
-"TurnQueue": ""
+"TurnQueue": "",
+"Wall": ""
 }
 
 [application]

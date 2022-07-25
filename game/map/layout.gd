@@ -31,6 +31,7 @@ const ANIM_SPEED = 250
 
 onready var dijkstra: DijkstraMap = DijkstraMap.new()
 onready var nav_draw: Node2D = $NavDraw
+onready var wall: Wall = $Wall
 onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
 
 
@@ -138,10 +139,14 @@ func setup_pathfinding():
 			var to_pos = pos + offset
 			if not pos_to_idx.has(to_pos):
 				continue
+			if wall.has_wall(pos, offset):
+				continue
 			dijkstra.connect_points(idx, pos_to_idx[to_pos], WEIGHT_CARDINAL, true)
 		for offset in OFFSETS_ORDINAL:
 			var to_pos = pos + offset
 			if not pos_to_idx.has(to_pos):
+				continue
+			if wall.has_wall(pos, offset):
 				continue
 			# only allow the connection if both related cardinal direction tiles are filled
 			if not pos_to_idx.has(Vector2(pos.x + offset.x, pos.y)):

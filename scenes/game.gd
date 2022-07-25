@@ -21,7 +21,7 @@ func _ready():
 		var character_resource = load(character_path)
 		characters.append(character_resource.instance())
 
-	switch_to_room(2)
+	switch_to_room(1)
 
 
 func _input(event):
