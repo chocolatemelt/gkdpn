@@ -69,4 +69,32 @@ margin_top = 663.0
 margin_right = 460.0
 margin_bottom = 745.0
 
+[node name="ActionMenu" type="HBoxContainer" parent="Overlay"]
+margin_left = 473.0
+margin_top = 663.0
+margin_right = 662.0
+margin_bottom = 744.0
+
+[node name="Move" type="Button" parent="Overlay/ActionMenu"]
+margin_right = 52.0
+margin_bottom = 81.0
+toggle_mode = true
+text = "Move"
+
+[node name="Attack" type="Button" parent="Overlay/ActionMenu"]
+margin_left = 56.0
+margin_right = 128.0
+margin_bottom = 81.0
+toggle_mode = true
+text = "Attack"
+
+[node name="Pass" type="Button" parent="Overlay/ActionMenu"]
+margin_left = 132.0
+margin_right = 184.0
+margin_bottom = 81.0
+text = "Pass"
+
 [connection signal="item_selected" from="Overlay/Debug/Map/MapSelect" to="." method="switch_to_room"]
+[connection signal="toggled" from="Overlay/ActionMenu/Move" to="." method="_on_Move_toggled"]
+[connection signal="toggled" from="Overlay/ActionMenu/Attack" to="." method="_on_Attack_toggled"]
+[connection signal="pressed" from="Overlay/ActionMenu/Pass" to="." method="_on_Pass_pressed"]

@@ -33,9 +33,11 @@ func next_turn():
 	_update()
 
 func _update():
-	$"/root/Game".current_room.world_update_origin(_get_active(), _get_active().position)
+	var active_chara = _get_active()
+	active_chara.turn_start()
+	$"/root/Game".current_room.world_update_origin(active_chara, active_chara.position)
 	print($"../CharacterInfo")
-	$"../CharacterInfo".set_character(_get_active())
+	$"../CharacterInfo".set_character(active_chara)
 
 func _get_active():
 	return _characters[_active]

@@ -14,6 +14,9 @@ var target_global_position: Vector2
 var selected: bool = false setget set_selected
 var selectable: bool = false setget set_selectable
 
+var can_move: bool = true
+var can_attack: bool = true
+
 export var display_name: String
 export var stats: Resource
 export var party_member = false
@@ -22,7 +25,7 @@ export var turn_order_icon: Texture
 
 func _ready() -> void:
 	selectable = true
-	
+
 
 func initialize():
 	actions.initialize(skills.get_children())
@@ -57,3 +60,7 @@ func _on_life_depleted():
 	# yield(skin.play_death(), "completed")
 	emit_signal("died", self)
 
+
+func turn_start():
+	can_move = true
+	can_attack = true

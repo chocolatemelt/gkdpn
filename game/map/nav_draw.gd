@@ -13,7 +13,6 @@ onready var corner_offsets: PoolVector2Array = PoolVector2Array([
 ])
 
 
-
 func idx_to_corners(idx: int):
 	var pos = tile_map.idx_to_pos[idx]
 	var world_pos = tile_map.map_to_world(pos)
