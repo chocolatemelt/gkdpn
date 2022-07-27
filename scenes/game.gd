@@ -20,6 +20,7 @@ func _ready():
 
 	for character_path in _get_resources("res://game/character/units", ".tscn"):
 		var character_resource = load(character_path)
+
 		characters.append(character_resource.instance())
 
 	switch_to_room(1)

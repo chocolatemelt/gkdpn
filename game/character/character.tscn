@@ -1,19 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/character/character.gd" type="Script" id=1]
 [ext_resource path="res://game/character/character_actions.gd" type="Script" id=2]
+[ext_resource path="res://game/character/stats/character_stats.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+max_life = 100
+max_mana = 50
+attack_damage = 80
+spell_damage = 40
+defense = 120
+speed = 100
+movement = 6.0
 
 [node name="Character" type="Area2D"]
 z_index = 2
 script = ExtResource( 1 )
+stats = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 playing = true
 centered = false
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -32, 0 )
-polygon = PoolVector2Array( 0, 0, 32, 16, 64, 0, 32, -16 )
 
 [node name="Actions" type="Node" parent="."]
 script = ExtResource( 2 )
