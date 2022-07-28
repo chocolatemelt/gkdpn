@@ -24,3 +24,5 @@ mode = 1
 cell_size = Vector2( 64, 32 )
 format = 1
 script = ExtResource( 3 )
+
+[node name="Enemies" type="Node2D" parent="."]

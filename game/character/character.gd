@@ -8,6 +8,7 @@ signal died(character)
 onready var actions = $Actions
 onready var skills = $Skills
 onready var ai = $AI
+onready var inline_outline = load('res://game/materials/inline_outline.tres')
 
 var target_global_position: Vector2
 
@@ -26,11 +27,11 @@ export var turn_order_icon: Texture
 func _ready() -> void:
 	selectable = true
 
-
 func initialize():
 	actions.initialize(skills.get_children())
 	stats = stats.copy()
 	stats.connect("life_depleted", self, "_on_life_depleted")
+
 
 
 func is_able_to_play() -> bool:
@@ -64,3 +65,8 @@ func _on_life_depleted():
 func turn_start():
 	can_move = true
 	can_attack = true
+	$AnimatedSprite.material = inline_outline
+
+
+func turn_end():
+	$AnimatedSprite.material = null

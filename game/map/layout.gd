@@ -32,12 +32,15 @@ const ANIM_SPEED = 250
 onready var dijkstra: DijkstraMap = DijkstraMap.new()
 onready var nav_draw: Node2D = $NavDraw
 onready var wall: Wall = $Wall
+onready var enemies: Node2D = $Enemies
 onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
 
 
 func _ready():
 	setup_pathfinding()
 	set_physics_process(false)
+	for enemy in $Enemies.get_children():
+		world_update_origin(enemy, enemy.position)
 
 
 func world_update_origin(player: Character, position: Vector2):
@@ -73,6 +76,7 @@ func update_origin(player: Character, pos: Vector2):
 	if is_physics_processing():
 		return
 	origin = pos_to_idx[pos]
+	dijkstra.disable_point(origin)
 	dijkstra.recalculate(origin, {
 		'maximum_cost': player.stats.movement,
 		'terrain_weights': tile_set.terrain_weights
@@ -103,6 +107,7 @@ func move_character():
 func _physics_process(delta):
 	if prepared_path.size() > 0:
 		if move_to(pos_to_world(idx_to_pos[prepared_path[0]]), delta):
+			dijkstra.enable_point(prepared_path[0])
 			prepared_path.remove(0)
 	else:
 		set_physics_process(false)

@@ -1,7 +1,5 @@
-extends HBoxContainer
-
-
 class_name TurnQueue
+extends HBoxContainer
 
 var _characters: Array
 var _active: int
@@ -18,8 +16,9 @@ func setup(characters: Array, active: int=0):
 	_active = active
 	for chara in _characters:
 		var turn_icon = TextureRect.new()
+		turn_icon.set_stretch_mode(TextureRect.STRETCH_SCALE)
 		turn_icon.texture = chara.turn_order_icon
-		turn_icon
+		turn_icon.set_custom_minimum_size(Vector2(40, 40))
 		add_child(turn_icon)
 		turn_icons.append(turn_icon)
 	_update()
@@ -28,6 +27,7 @@ func setup(characters: Array, active: int=0):
 #	yield(_get_active().play_turn(), "completed")
 
 func next_turn():
+	_get_active().turn_end()
 	move_child(turn_icons[_active], _characters.size()-1)
 	_active = (_active + 1) % _characters.size()
 	_update()

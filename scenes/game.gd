@@ -2,7 +2,7 @@ extends Node2D
 
 
 var rooms: Array
-var characters: Array = []
+var party: Array = []
 
 
 var current_room: Layout = null
@@ -20,8 +20,7 @@ func _ready():
 
 	for character_path in _get_resources("res://game/character/units", ".tscn"):
 		var character_resource = load(character_path)
-
-		characters.append(character_resource.instance())
+		party.append(character_resource.instance())
 
 	switch_to_room(1)
 	current_room.nav_draw.visible = false
@@ -85,8 +84,10 @@ func adjust_mouse_position(position: Vector2):
 
 func switch_to_room(idx: int):
 	if idx < rooms.size():
+		var characters: Array = []
+
 		if current_room:
-			for character in characters:
+			for character in party:
 				current_room.remove_child(character)
 			remove_child(current_room)
 			current_room.disconnect("movement_done", self, "_on_movement_done")
@@ -99,10 +100,15 @@ func switch_to_room(idx: int):
 
 		var spawn_tiles = current_room.get_spawn_tiles()
 		spawn_tiles.sort()
-		for idx in characters.size():
-			var character = characters[idx]
+		for idx in party.size():
+			var character = party[idx]
 			current_room.add_child(character)
 			current_room.spawn(character, spawn_tiles[idx])
+			characters.append(character)
+		
+		for enemy in current_room.enemies.get_children():
+			characters.append(enemy)
+
 		turn_queue.setup(characters, 0)
 
 

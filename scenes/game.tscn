@@ -58,9 +58,10 @@ text = "T:    0,    0 [NA]"
 [node name="TurnQueue" type="HBoxContainer" parent="Overlay"]
 margin_left = 34.0
 margin_top = 28.0
-margin_right = 74.0
+margin_right = 634.0
 margin_bottom = 68.0
-rect_scale = Vector2( 3, 3 )
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
 script = ExtResource( 4 )
 
 [node name="CharacterInfo" parent="Overlay" instance=ExtResource( 5 )]
