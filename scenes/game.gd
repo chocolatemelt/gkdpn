@@ -24,19 +24,27 @@ func _ready():
 
 	switch_to_room(1)
 	current_room.nav_draw.visible = false
-
+	current_room.act_draw.visible = false
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		var adj_position = adjust_mouse_position(event.position)
-		current_room.world_update_target(adj_position)
+		if current_act == ActState.MOVE:
+			current_room.world_update_target(adj_position)
+		elif current_act == ActState.ATTACK:
+			current_room.draw_act_target(adj_position)
 
 	if event is InputEventMouseButton and event.pressed:
 		var adj_position = adjust_mouse_position(event.position)
-		if current_act == ActState.MOVE and event.button_index == BUTTON_LEFT:
-			current_room.move_character()
-		else:
-			current_room.nav_draw.visible = false
+		if event.button_index == BUTTON_LEFT:
+			if current_act == ActState.MOVE:
+				current_room.move_character()
+			if current_act == ActState.ATTACK:
+				var basic_attack = turn_queue.active_character.get_node("Actions/BasicAttack")
+				var act_target = current_room.get_act_target_character()
+				if basic_attack.valid_target(act_target):
+					basic_attack.execute([act_target])
+					_on_Attack_done()
 
 
 func _get_current_camera():
@@ -59,6 +67,7 @@ func _get_current_camera():
 func _set_current_act(value):
 	current_act = value
 	current_room.nav_draw.visible = value == ActState.MOVE and turn_queue.active_character.can_move
+	current_room.act_draw.visible = value == ActState.ATTACK and turn_queue.active_character.can_attack
 
 
 func _get_resources(dir_path: String, ext: String):
@@ -87,7 +96,7 @@ func switch_to_room(idx: int):
 		var characters: Array = []
 
 		if current_room:
-			for character in party:
+			for character in current_room.party.get_children():
 				current_room.remove_child(character)
 			remove_child(current_room)
 			current_room.disconnect("movement_done", self, "_on_movement_done")
@@ -102,11 +111,15 @@ func switch_to_room(idx: int):
 		spawn_tiles.sort()
 		for idx in party.size():
 			var character = party[idx]
-			current_room.add_child(character)
+			current_room.party.add_child(character)
+			character.initialize()
+			character.stats.reset()
 			current_room.spawn(character, spawn_tiles[idx])
 			characters.append(character)
-		
+
 		for enemy in current_room.enemies.get_children():
+			enemy.initialize()
+			enemy.stats.reset()
 			characters.append(enemy)
 
 		turn_queue.setup(characters, 0)
@@ -123,14 +136,24 @@ func _on_movement_done():
 	turn_queue.active_character.can_move = false
 	$Overlay/ActionMenu/Move.set_disabled(true)
 	_set_current_act(ActState.NONE)
-
+	if not turn_queue.active_character.can_move and not turn_queue.active_character.can_attack:
+		_on_Pass_pressed()
 
 func _on_Attack_toggled(button_pressed: bool):
 	if button_pressed:
 		_set_current_act(ActState.ATTACK)
 	else:
 		_set_current_act(ActState.NONE)
+	var basic_attack = turn_queue.active_character.get_node("Actions/BasicAttack")
+	basic_attack.prepare()
 
+
+func _on_Attack_done():
+	turn_queue.active_character.can_attack = false
+	$Overlay/ActionMenu/Attack.set_disabled(true)
+	_set_current_act(ActState.NONE)
+	if not turn_queue.active_character.can_move and not turn_queue.active_character.can_attack:
+		_on_Pass_pressed()
 
 func _on_Pass_pressed():
 	$Overlay/ActionMenu/Move.set_disabled(false)

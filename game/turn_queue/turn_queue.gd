@@ -36,7 +36,6 @@ func _update():
 	var active_chara = _get_active()
 	active_chara.turn_start()
 	$"/root/Game".current_room.world_update_origin(active_chara, active_chara.position)
-	print($"../CharacterInfo")
 	$"../CharacterInfo".set_character(active_chara)
 
 func _get_active():

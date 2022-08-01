@@ -6,11 +6,10 @@ signal died(character)
 
 
 onready var actions = $Actions
-onready var skills = $Skills
 onready var ai = $AI
 onready var inline_outline = load('res://game/materials/inline_outline.tres')
 
-var target_global_position: Vector2
+var room: Node2D
 
 var selected: bool = false setget set_selected
 var selectable: bool = false setget set_selectable
@@ -27,11 +26,13 @@ export var turn_order_icon: Texture
 func _ready() -> void:
 	selectable = true
 
+
 func initialize():
-	actions.initialize(skills.get_children())
+	for action in actions.get_children():
+		action.initialize(self)
 	stats = stats.copy()
 	stats.connect("life_depleted", self, "_on_life_depleted")
-
+	room = get_parent().get_parent()
 
 
 func is_able_to_play() -> bool:

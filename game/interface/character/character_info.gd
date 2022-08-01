@@ -18,8 +18,8 @@ func set_character(character: Character) -> void:
 		character.stats.connect("mana_changed", self, "_on_mana_changed")
 
 		_active = character
-		current_life_value = _active.stats.max_life
-		current_mana_value = _active.stats.max_mana
+		current_life_value = _active.stats.life
+		current_mana_value = _active.stats.mana
 		name_label.set_text(_active.display_name)
 		life_label.set_text("Life: %s/%s" % [current_life_value, _active.stats.max_life])
 		mana_label.set_text("Mana: %s/%s" % [current_mana_value, _active.stats.max_mana])

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/character/character.gd" type="Script" id=1]
-[ext_resource path="res://game/character/character_actions.gd" type="Script" id=2]
+[ext_resource path="res://game/character/actions/basic_attack.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/character/stats/character_stats.gd" type="Script" id=3]
 
 [sub_resource type="Resource" id=1]
@@ -24,9 +24,8 @@ playing = true
 centered = false
 
 [node name="Actions" type="Node" parent="."]
-script = ExtResource( 2 )
 
-[node name="Skills" type="Node" parent="."]
+[node name="BasicAttack" parent="Actions" instance=ExtResource( 2 )]
 
 [node name="AI" type="Node" parent="."]
 

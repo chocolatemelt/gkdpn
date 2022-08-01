@@ -39,7 +39,7 @@ func _draw():
 		draw_circle(prev_pos, 16.0, Color.blue)
 
 	for idx in cost_map.keys():
-		draw_colored_polygon(idx_to_corners(idx), Color(1, 0, 0, alpha_step * cost_map[idx]))
+		draw_colored_polygon(idx_to_corners(idx), Color(1, 0.5, 0, alpha_step * cost_map[idx]))
 
 
 func update_params(costs: Dictionary, movement: int):

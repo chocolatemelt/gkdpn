@@ -28,11 +28,15 @@ const OFFSETS_ORDINAL: PoolVector2Array = PoolVector2Array([
 const WEIGHT_ORDINAL: float = 1.5
 # move anim speed in pixel/s
 const ANIM_SPEED = 250
+enum ActShape {SELF = 0, SQUARE = 1, ROUNDED = 2, DIAMOND = 3}
+
 
 onready var dijkstra: DijkstraMap = DijkstraMap.new()
 onready var nav_draw: Node2D = $NavDraw
+onready var act_draw: Node2D = $ActDraw
 onready var wall: Wall = $Wall
-onready var enemies: Node2D = $Enemies
+onready var party: Node = $Party
+onready var enemies: Node = $Enemies
 onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
 
 
@@ -103,6 +107,47 @@ func move_character():
 	if prepared_path.size() > 1:
 		set_physics_process(true)
 
+
+func draw_act_shape(position: Vector2, shape: int, radius: int):
+	var pos = world_to_map(position)
+	var costs: Dictionary = {}
+	if shape == ActShape.SELF:
+		radius = 1
+		costs[pos] = 1 
+	elif shape == ActShape.SQUARE:
+		for i in range(-radius, radius+1):
+			for j in range(-radius, radius+1):
+				var offset_pos = pos + Vector2(i, j)
+				if pos_to_idx.has(offset_pos):
+					costs[offset_pos] = max(abs(i), abs(j))
+	elif shape == ActShape.ROUNDED:
+		pass
+	elif shape == ActShape.DIAMOND:
+		pass
+	act_draw.update_params(costs, radius)
+
+
+func draw_act_target(position: Vector2):
+	var pos = world_to_map(position)
+	if pos_to_idx.has(pos):
+		act_draw.target = pos
+	else:
+		act_draw.target = Vector2.INF
+	act_draw.update()
+
+
+func get_act_target_character():
+	if act_draw.target == Vector2.INF:
+		return null
+	if not act_draw.cost_map.has(act_draw.target):
+		return null
+	for enemy in enemies.get_children():
+		if world_to_map(enemy.position) == act_draw.target:
+			return enemy
+	for chara in party.get_children():
+		if world_to_map(chara.position) == act_draw.target:
+			return chara
+	return null
 
 func _physics_process(delta):
 	if prepared_path.size() > 0:
