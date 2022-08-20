@@ -127,6 +127,7 @@ func switch_to_room(idx: int):
 
 func _on_Move_toggled(button_pressed: bool):
 	if button_pressed:
+		$Overlay/ActionMenu/Attack.set_pressed(false)
 		_set_current_act(ActState.MOVE)
 	else:
 		_set_current_act(ActState.NONE)
@@ -141,6 +142,7 @@ func _on_movement_done():
 
 func _on_Attack_toggled(button_pressed: bool):
 	if button_pressed:
+		$Overlay/ActionMenu/Move.set_pressed(false)
 		_set_current_act(ActState.ATTACK)
 	else:
 		_set_current_act(ActState.NONE)

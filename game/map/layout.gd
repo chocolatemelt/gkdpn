@@ -28,10 +28,11 @@ const OFFSETS_ORDINAL: PoolVector2Array = PoolVector2Array([
 const WEIGHT_ORDINAL: float = 1.5
 # move anim speed in pixel/s
 const ANIM_SPEED = 250
-enum ActShape {SELF = 0, SQUARE = 1, ROUNDED = 2, DIAMOND = 3}
+enum ActShape {SELF = 0, SQUARE = 1, LINE = 2}
 
 
 onready var dijkstra: DijkstraMap = DijkstraMap.new()
+onready var act_dijkstra: DijkstraMap = DijkstraMap.new()
 onready var nav_draw: Node2D = $NavDraw
 onready var act_draw: Node2D = $ActDraw
 onready var wall: Wall = $Wall
@@ -108,22 +109,42 @@ func move_character():
 		set_physics_process(true)
 
 
-func draw_act_shape(position: Vector2, shape: int, radius: int):
+func draw_act_shape(position: Vector2, shape: int, radius: int, pathed: bool = true):
 	var pos = world_to_map(position)
 	var costs: Dictionary = {}
+
 	if shape == ActShape.SELF:
 		radius = 1
-		costs[pos] = 1 
+		costs[pos] = 1
 	elif shape == ActShape.SQUARE:
 		for i in range(-radius, radius+1):
 			for j in range(-radius, radius+1):
 				var offset_pos = pos + Vector2(i, j)
 				if pos_to_idx.has(offset_pos):
 					costs[offset_pos] = max(abs(i), abs(j))
-	elif shape == ActShape.ROUNDED:
-		pass
-	elif shape == ActShape.DIAMOND:
-		pass
+	elif shape == ActShape.LINE:
+		for r in range(1, radius+1):
+			for dir in [Vector2(0, 1), Vector2(1, 0), Vector2(0, -1), Vector2(-1, 0)]:
+				var offset_pos = pos + r * dir
+				if pos_to_idx.has(offset_pos):
+					costs[offset_pos] = r
+
+	if pathed:
+		for idx in idx_to_pos.keys():
+			if costs.has(idx_to_pos[idx]):
+				act_dijkstra.enable_point(idx)
+			else:
+				act_dijkstra.disable_point(idx)
+		act_dijkstra.recalculate(origin, {
+			'maximum_cost': float(radius),
+			'terrain_weights': {-1: 1.0}
+		})
+		var ref_costs = act_dijkstra.get_cost_map()
+		costs = {}
+		for idx in ref_costs.keys():
+			costs[idx_to_pos[idx]] = ref_costs[idx]
+
+
 	act_draw.update_params(costs, radius)
 
 
@@ -204,3 +225,7 @@ func setup_pathfinding():
 			if not pos_to_idx.has(Vector2(pos.x, pos.y + offset.y)):
 				continue
 			dijkstra.connect_points(pos_to_idx[to_pos], idx, WEIGHT_ORDINAL, false)
+	
+	act_dijkstra.duplicate_graph_from(dijkstra)
+	for idx in idx_to_pos.keys():
+		act_dijkstra.set_terrain_for_point(idx, -1)
