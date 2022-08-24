@@ -14,7 +14,7 @@ max_mana = 75
 attack_damage = 25
 spell_damage = 100
 defense = 50
-speed = 50
+speed = 4
 movement = 3.0
 
 [sub_resource type="AtlasTexture" id=2]

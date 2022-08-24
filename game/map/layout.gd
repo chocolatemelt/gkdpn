@@ -162,13 +162,24 @@ func get_act_target_character():
 		return null
 	if not act_draw.cost_map.has(act_draw.target):
 		return null
+	get_pos_character(act_draw.target)
+
+
+func get_position_character(position: Vector2):
+	var pos = world_to_map(position)
+	print(pos)
+	return get_pos_character(pos)
+
+
+func get_pos_character(pos: Vector2):
 	for enemy in enemies.get_children():
-		if world_to_map(enemy.position) == act_draw.target:
+		if world_to_map(enemy.position) == pos:
 			return enemy
 	for chara in party.get_children():
-		if world_to_map(chara.position) == act_draw.target:
+		if world_to_map(chara.position) == pos:
 			return chara
 	return null
+
 
 func _physics_process(delta):
 	if prepared_path.size() > 0:

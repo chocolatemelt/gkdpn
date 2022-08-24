@@ -9,6 +9,12 @@ var turn_order: PoolIntArray = PoolIntArray()
 var active_character: Character setget ,_get_active
 var turn_icons: Array = []
 
+
+func speed_sort(a, b):
+	# slowest to fastest
+	return a.stats.speed > b.stats.speed
+
+
 func setup(characters: Array, active: int=0):
 	for prev_icon in turn_icons:
 		# may need to type check here?
@@ -16,6 +22,7 @@ func setup(characters: Array, active: int=0):
 		prev_icon.call_deferred("free")
 	turn_icons = []
 	_characters = characters
+	_characters.sort_custom(self, "speed_sort")
 	_active = active
 	update_turn_order()
 	_update()
@@ -32,8 +39,9 @@ func update_turn_order():
 	for count in range(0, _max_speed+_min_speed, _min_speed):
 		for c_idx in range(_characters.size()):
 			var chara = _characters[c_idx]
+			# print(chara.display_name, " ", chara.stats.speed, " ", count)
 			if chara.stats.speed > count:
-				break
+				continue
 			turn_order.push_back(c_idx)
 			var turn_icon = TextureRect.new()
 			turn_icon.set_stretch_mode(TextureRect.STRETCH_SCALE)

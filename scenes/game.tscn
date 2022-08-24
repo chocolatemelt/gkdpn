@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/cam_mouse.gd" type="Script" id=2]
 [ext_resource path="res://scenes/debug.gd" type="Script" id=3]
 [ext_resource path="res://game/turn_queue/turn_queue.gd" type="Script" id=4]
 [ext_resource path="res://game/interface/character/character_info.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/interface/action_menu.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -70,32 +71,6 @@ margin_top = 663.0
 margin_right = 460.0
 margin_bottom = 745.0
 
-[node name="ActionMenu" type="HBoxContainer" parent="Overlay"]
-margin_left = 473.0
-margin_top = 663.0
-margin_right = 662.0
-margin_bottom = 744.0
-
-[node name="Move" type="Button" parent="Overlay/ActionMenu"]
-margin_right = 52.0
-margin_bottom = 81.0
-toggle_mode = true
-text = "Move"
-
-[node name="Attack" type="Button" parent="Overlay/ActionMenu"]
-margin_left = 56.0
-margin_right = 128.0
-margin_bottom = 81.0
-toggle_mode = true
-text = "Attack"
-
-[node name="Pass" type="Button" parent="Overlay/ActionMenu"]
-margin_left = 132.0
-margin_right = 184.0
-margin_bottom = 81.0
-text = "Pass"
+[node name="ActionMenu" parent="Overlay" instance=ExtResource( 6 )]
 
 [connection signal="item_selected" from="Overlay/Debug/Map/MapSelect" to="." method="switch_to_room"]
-[connection signal="toggled" from="Overlay/ActionMenu/Move" to="." method="_on_Move_toggled"]
-[connection signal="toggled" from="Overlay/ActionMenu/Attack" to="." method="_on_Attack_toggled"]
-[connection signal="pressed" from="Overlay/ActionMenu/Pass" to="." method="_on_Pass_pressed"]

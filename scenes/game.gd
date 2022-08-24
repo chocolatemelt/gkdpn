@@ -11,7 +11,9 @@ var current_camera: Camera2D setget ,_get_current_camera
 enum ActState {NONE, MOVE, ATTACK}
 var current_act = ActState.NONE setget _set_current_act
 
+onready var character_info = $Overlay/CharacterInfo
 onready var turn_queue: TurnQueue = $Overlay/TurnQueue
+onready var action_menu: ActionMenu = $Overlay/ActionMenu
 
 func _ready():
 	rooms = _get_resources("res://game/map/rooms", ".tscn")
@@ -44,8 +46,15 @@ func _input(event):
 				var act_target = current_room.get_act_target_character()
 				if basic_attack.valid_target(act_target):
 					basic_attack.execute([act_target])
-					_on_Attack_done()
-
+					action_menu._on_Attack_done()
+			if current_act == ActState.NONE:
+				var act_target = current_room.get_position_character(adj_position)
+				if act_target and act_target != turn_queue.active_character:
+					character_info.set_character(act_target)
+					action_menu.visible = false
+				else:
+					character_info.set_character(turn_queue.active_character)
+					action_menu.visible = true
 
 func _get_current_camera():
 	if current_camera and current_camera.current:
@@ -99,12 +108,12 @@ func switch_to_room(idx: int):
 			for character in current_room.party.get_children():
 				current_room.remove_child(character)
 			remove_child(current_room)
-			current_room.disconnect("movement_done", self, "_on_movement_done")
+			current_room.disconnect("movement_done", action_menu, "_on_movement_done")
 			current_room.call_deferred("free")
 
 		var room_resource = load(rooms[idx])
 		current_room = room_resource.instance()
-		current_room.connect("movement_done", self, "_on_movement_done")
+		current_room.connect("movement_done", action_menu, "_on_movement_done")
 		add_child(current_room)
 
 		var spawn_tiles = current_room.get_spawn_tiles()
@@ -123,43 +132,3 @@ func switch_to_room(idx: int):
 			characters.append(enemy)
 
 		turn_queue.setup(characters, 0)
-
-
-func _on_Move_toggled(button_pressed: bool):
-	if button_pressed:
-		$Overlay/ActionMenu/Attack.set_pressed(false)
-		_set_current_act(ActState.MOVE)
-	else:
-		_set_current_act(ActState.NONE)
-
-
-func _on_movement_done():
-	turn_queue.active_character.can_move = false
-	$Overlay/ActionMenu/Move.set_disabled(true)
-	_set_current_act(ActState.NONE)
-	if not turn_queue.active_character.can_move and not turn_queue.active_character.can_attack:
-		_on_Pass_pressed()
-
-func _on_Attack_toggled(button_pressed: bool):
-	if button_pressed:
-		$Overlay/ActionMenu/Move.set_pressed(false)
-		_set_current_act(ActState.ATTACK)
-	else:
-		_set_current_act(ActState.NONE)
-	var basic_attack = turn_queue.active_character.get_node("Actions/BasicAttack")
-	basic_attack.prepare()
-
-
-func _on_Attack_done():
-	turn_queue.active_character.can_attack = false
-	$Overlay/ActionMenu/Attack.set_disabled(true)
-	_set_current_act(ActState.NONE)
-	if not turn_queue.active_character.can_move and not turn_queue.active_character.can_attack:
-		_on_Pass_pressed()
-
-func _on_Pass_pressed():
-	$Overlay/ActionMenu/Move.set_disabled(false)
-	$Overlay/ActionMenu/Move.set_pressed(false)
-	$Overlay/ActionMenu/Attack.set_disabled(false)
-	$Overlay/ActionMenu/Attack.set_pressed(false)
-	turn_queue.next_turn()
