@@ -28,6 +28,7 @@ func _ready():
 	current_room.nav_draw.visible = false
 	current_room.act_draw.visible = false
 
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		var adj_position = adjust_mouse_position(event.position)
@@ -40,9 +41,10 @@ func _input(event):
 		var adj_position = adjust_mouse_position(event.position)
 		if event.button_index == BUTTON_LEFT:
 			if current_act == ActState.MOVE:
-				current_room.move_character()
+				if current_room.move_character():
+					action_menu.set_disabled(true)
 			if current_act == ActState.ATTACK:
-				var basic_attack = turn_queue.active_character.get_node("Actions/BasicAttack")
+				var basic_attack = turn_queue.active_character.get_attack()
 				var act_target = current_room.get_act_target_character()
 				if basic_attack.valid_target(act_target):
 					basic_attack.execute([act_target])
@@ -55,6 +57,7 @@ func _input(event):
 				else:
 					character_info.set_character(turn_queue.active_character)
 					action_menu.visible = true
+
 
 func _get_current_camera():
 	if current_camera and current_camera.current:

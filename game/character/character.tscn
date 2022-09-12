@@ -27,6 +27,4 @@ centered = false
 
 [node name="BasicAttack" parent="Actions" instance=ExtResource( 2 )]
 
-[node name="AI" type="Node" parent="."]
-
 [node name="CamFollow" type="Camera2D" parent="."]

@@ -7,6 +7,13 @@ onready var _attack = $Attack
 onready var _move = $Move
 onready var _pass = $Pass
 
+
+func set_disabled(state):
+	# state xor can_attack/move
+	_attack.set_disabled(state or not _game.turn_queue.active_character.can_attack)
+	_move.set_disabled(state or not _game.turn_queue.active_character.can_move)
+	_pass.set_disabled(state)
+
 func _on_Move_toggled(button_pressed: bool):
 	if button_pressed:
 		_attack.set_pressed(false)
@@ -17,7 +24,7 @@ func _on_Move_toggled(button_pressed: bool):
 
 func _on_movement_done():
 	_game.turn_queue.active_character.can_move = false
-	_move.set_disabled(true)
+	set_disabled(false)
 	_game.current_act = _game.ActState.NONE
 	if not _game.turn_queue.active_character.can_move and not _game.turn_queue.active_character.can_attack:
 		_on_Pass_pressed()
@@ -41,7 +48,8 @@ func _on_Attack_done():
 
 func _on_Pass_pressed():
 	_move.set_disabled(false)
-	_move.set_pressed(false)
 	_attack.set_disabled(false)
+	_move.set_pressed(false)
 	_attack.set_pressed(false)
+	_pass.set_disabled(false)
 	_game.turn_queue.next_turn()

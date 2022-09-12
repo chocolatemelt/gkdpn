@@ -3,12 +3,14 @@ extends HBoxContainer
 
 var _characters: Array
 var _active: int
-var _min_speed: int
-var _max_speed: int
+var _min_speed: float
+var _max_speed: float
 var turn_order: PoolIntArray = PoolIntArray()
 var active_character: Character setget ,_get_active
 var turn_icons: Array = []
 
+onready var _game = $"/root/Game"
+onready var _chara_info = $"../CharacterInfo"
 
 func speed_sort(a, b):
 	# slowest to fastest
@@ -35,7 +37,6 @@ func update_turn_order():
 		_max_speed = max(_max_speed, chara.stats.speed)
 
 	turn_order.resize(0)
-	var grouped_turn_order = []
 	for count in range(0, _max_speed+_min_speed, _min_speed):
 		for c_idx in range(_characters.size()):
 			var chara = _characters[c_idx]
@@ -59,8 +60,10 @@ func next_turn():
 func _update():
 	var active_chara = _get_active()
 	active_chara.turn_start()
-	$"/root/Game".current_room.world_update_origin(active_chara, active_chara.position)
-	$"../CharacterInfo".set_character(active_chara)
+	_game.current_room.world_update_origin(active_chara, active_chara.position)
+	_chara_info.set_character(active_chara)
+	if active_chara.combat_ai:
+		active_chara.combat_ai.enact_turn()
 
 func _get_active():
 	return _characters[turn_order[_active]]

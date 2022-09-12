@@ -107,14 +107,15 @@ func update_target(pos: Vector2):
 func move_character():
 	if prepared_path.size() > 1:
 		set_physics_process(true)
+		return true
+	return false
 
 
-func draw_act_shape(position: Vector2, shape: int, radius: int, pathed: bool = true):
+func get_act_shape(position: Vector2, shape: int, radius: int, pathed: bool = true):
 	var pos = world_to_map(position)
 	var costs: Dictionary = {}
 
 	if shape == ActShape.SELF:
-		radius = 1
 		costs[pos] = 1
 	elif shape == ActShape.SQUARE:
 		for i in range(-radius, radius+1):
@@ -144,7 +145,11 @@ func draw_act_shape(position: Vector2, shape: int, radius: int, pathed: bool = t
 		for idx in ref_costs.keys():
 			costs[idx_to_pos[idx]] = ref_costs[idx]
 
+	return costs
 
+
+func draw_act_shape(position: Vector2, shape: int, radius: int, pathed: bool = true):
+	var costs = get_act_shape(position, shape, radius, pathed)
 	act_draw.update_params(costs, radius)
 
 
@@ -167,7 +172,6 @@ func get_act_target_character():
 
 func get_position_character(position: Vector2):
 	var pos = world_to_map(position)
-	print(pos)
 	return get_pos_character(pos)
 
 
@@ -181,6 +185,17 @@ func get_pos_character(pos: Vector2):
 	return null
 
 
+func get_party_in_pos_list(pos_list: Array, alive: bool = false) -> Dictionary:
+	var found_chara = {}
+	for chara in party.get_children():
+		if alive and not chara.alive():
+			continue
+		var chara_pos = world_to_map(chara.position)
+		if pos_list.has(chara_pos):
+			found_chara[chara_pos] = chara
+	return found_chara
+
+
 func _physics_process(delta):
 	if prepared_path.size() > 0:
 		if move_to(pos_to_world(idx_to_pos[prepared_path[0]]), delta):
@@ -192,15 +207,15 @@ func _physics_process(delta):
 		emit_signal("movement_done")
 
 
-func move_to(target: Vector2, delta: float) -> bool:
-	var distance: float = prepared_character.position.distance_to(target)
+func move_to(target_position: Vector2, delta: float) -> bool:
+	var distance: float = prepared_character.position.distance_to(target_position)
 	if distance > 10:
 		prepared_character.position = prepared_character.position.linear_interpolate(
-			target, (ANIM_SPEED * delta)/distance
+			target_position, (ANIM_SPEED * delta)/distance
 		)
 		return false
 	else:
-		prepared_character.position = target
+		prepared_character.position = target_position
 		return true
 
 func setup_pathfinding():

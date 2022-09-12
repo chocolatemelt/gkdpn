@@ -1,12 +1,11 @@
 extends CombatAction
 
+
 func prepare():
-	assert(initialized)
 	actor.room.draw_act_shape(actor.position, shape, aoe)
 
 
 func valid_target(target: Character):
-	assert(initialized)
 	if not target:
 		return false
 	if target.party_member:
@@ -15,7 +14,10 @@ func valid_target(target: Character):
 
 
 func execute(targets: Array):
-	assert(initialized)
-	var hit: Hit = Hit.new(10)
+	var hit: Hit = Hit.new(50)
 	for target in targets:
 		target.take_damage(hit)
+
+
+func get_act_shape():
+	return actor.room.get_act_shape(actor.position, shape, aoe)

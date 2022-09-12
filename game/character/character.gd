@@ -6,7 +6,6 @@ signal died(character)
 
 
 onready var actions = $Actions
-onready var ai = $AI
 onready var inline_outline = load('res://game/materials/inline_outline.tres')
 
 var room: Node2D
@@ -19,6 +18,7 @@ var can_attack: bool = true
 
 export var display_name: String
 export var stats: Resource
+export var combat_ai: Resource
 export var party_member = false
 export var turn_order_icon: Texture
 
@@ -33,12 +33,16 @@ func initialize():
 	stats = stats.copy()
 	stats.connect("life_depleted", self, "_on_life_depleted")
 	room = get_parent().get_parent()
+	if combat_ai:
+		combat_ai.initialize(self)
 
 
-func is_able_to_play() -> bool:
+func alive() -> bool:
 	# Returns true if the character can perform an action
 	return stats.life > 0
 
+func get_attack() -> Node:
+	return get_node("Actions/BasicAttack")
 
 func set_selected(value):
 	selected = value
