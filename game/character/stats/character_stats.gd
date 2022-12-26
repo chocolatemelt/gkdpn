@@ -37,9 +37,9 @@ func copy() -> CharacterStats:
 	return copy
 
 
-func take_damage(hit: Hit):
+func take_damage(amount: int):
 	var old_life = life
-	life -= hit.damage
+	life -= amount
 	life = max(0, life)
 	emit_signal("life_changed", life, old_life)
 	if life == 0:

@@ -44,7 +44,7 @@ onready var cell_offset: Vector2 = Vector2(0, cell_size.y / 2)
 func _ready():
 	setup_pathfinding()
 	set_physics_process(false)
-	for enemy in $Enemies.get_children():
+	for enemy in enemies.get_children():
 		world_update_origin(enemy, enemy.position)
 
 
@@ -167,7 +167,7 @@ func get_act_target_character():
 		return null
 	if not act_draw.cost_map.has(act_draw.target):
 		return null
-	get_pos_character(act_draw.target)
+	return get_pos_character(act_draw.target)
 
 
 func get_position_character(position: Vector2):

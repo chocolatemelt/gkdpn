@@ -41,12 +41,23 @@ func alive() -> bool:
 	# Returns true if the character can perform an action
 	return stats.life > 0
 
+func get_attack_scope() -> Scope:
+	var scope = Scope.new()
+	var atk_mod = Mod.new(-1, stats.attack_damage, 'stats.attack_damage')
+	atk_mod.debug()
+	scope.apply_mod(atk_mod)
+	return scope
+
+func get_defense_scope() -> Scope:
+	var scope = Scope.new()
+	scope.apply_mod(Mod.new(-1, stats.defense, 'stats.defense'))
+	return scope
+
 func get_attack() -> Node:
 	return get_node("Actions/BasicAttack")
 
 func set_selected(value):
 	selected = value
-
 
 func set_selectable(value):
 	selectable = value
@@ -54,8 +65,9 @@ func set_selectable(value):
 		set_selected(false)
 
 
-func take_damage(hit):
-	stats.take_damage(hit)
+func take_damage(received: Scope):
+	var amount = received.evaluate_upon(get_defense_scope())
+	stats.take_damage(amount)
 	# prevent playing both stagger and death animation if life <= 0
 	# if stats.life > 0:
 	# 	skin.play_stagger()

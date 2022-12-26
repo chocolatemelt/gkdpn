@@ -45,11 +45,6 @@ _global_script_classes=[ {
 "path": "res://addons/dijkstra-map/Dijkstra_map_library/nativescript.gdns"
 }, {
 "base": "Reference",
-"class": "Hit",
-"language": "GDScript",
-"path": "res://game/combat/hit.gd"
-}, {
-"base": "Reference",
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://game/party/inventory.gd"
@@ -69,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://game/character/skills/learned_skill.gd"
 }, {
+"base": "Reference",
+"class": "Mod",
+"language": "GDScript",
+"path": "res://game/combat/mod.gd"
+}, {
 "base": "Node",
 "class": "Modifier",
 "language": "GDScript",
@@ -78,6 +78,11 @@ _global_script_classes=[ {
 "class": "Party",
 "language": "GDScript",
 "path": "res://game/party/party.gd"
+}, {
+"base": "Reference",
+"class": "Scope",
+"language": "GDScript",
+"path": "res://game/combat/scope.gd"
 }, {
 "base": "Resource",
 "class": "Skill",
@@ -107,13 +112,14 @@ _global_script_class_icons={
 "CombatAI": "",
 "CombatAction": "",
 "DijkstraMap": "",
-"Hit": "",
 "Inventory": "",
 "Item": "",
 "Layout": "",
 "LearnedSkill": "",
+"Mod": "",
 "Modifier": "",
 "Party": "",
+"Scope": "",
 "Skill": "",
 "SkillAction": "",
 "TurnQueue": "",
@@ -136,7 +142,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/rect_extents_2D/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [gdnative]
 

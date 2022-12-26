@@ -38,7 +38,7 @@ turn_order_icon = SubResource( 2 )
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2( -15, -31 )
 frames = SubResource( 1 )
-frame = 2
+frame = 3
 
 [node name="BasicAttack" parent="Actions" index="0"]
 aoe = 3

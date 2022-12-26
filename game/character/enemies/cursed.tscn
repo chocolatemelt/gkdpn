@@ -23,7 +23,6 @@ animations = [ {
 [node name="Character" instance=ExtResource( 1 )]
 display_name = "Cursed Being"
 combat_ai = SubResource( 5 )
-party_member = true
 turn_order_icon = SubResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="0"]
