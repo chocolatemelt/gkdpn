@@ -22,12 +22,20 @@ margin_bottom = 81.0
 toggle_mode = true
 text = "Attack"
 
-[node name="Pass" type="Button" parent="."]
+[node name="Skill" type="Button" parent="."]
 margin_left = 132.0
-margin_right = 184.0
+margin_right = 194.0
+margin_bottom = 81.0
+toggle_mode = true
+text = "Skill"
+
+[node name="Pass" type="Button" parent="."]
+margin_left = 198.0
+margin_right = 250.0
 margin_bottom = 81.0
 text = "Pass"
 
 [connection signal="toggled" from="Move" to="." method="_on_Move_toggled"]
 [connection signal="toggled" from="Attack" to="." method="_on_Attack_toggled"]
+[connection signal="toggled" from="Skill" to="." method="_on_Skill_toggled"]
 [connection signal="pressed" from="Pass" to="." method="_on_Pass_pressed"]

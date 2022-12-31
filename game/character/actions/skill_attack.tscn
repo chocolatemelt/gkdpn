@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/character/actions/basic_attack.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/character/actions/skill_attack.gd" type="Script" id=2]
+
+[node name="SkillAttack" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+description = "Base combat action"

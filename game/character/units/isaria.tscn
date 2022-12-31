@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://game/character/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/isaria/isaria18.png" type="Texture" id=2]
@@ -25,6 +25,68 @@
 [ext_resource path="res://assets/isaria/isaria10.png" type="Texture" id=23]
 [ext_resource path="res://assets/isaria/isaria21.png" type="Texture" id=24]
 [ext_resource path="res://assets/isaria/isaria12.png" type="Texture" id=25]
+[ext_resource path="res://assets/reed/reed_skill10.png" type="Texture" id=26]
+[ext_resource path="res://assets/reed/reed_skill56.png" type="Texture" id=27]
+[ext_resource path="res://assets/reed/reed_skill52.png" type="Texture" id=28]
+[ext_resource path="res://assets/reed/reed_skill57.png" type="Texture" id=29]
+[ext_resource path="res://assets/reed/reed_skill58.png" type="Texture" id=30]
+[ext_resource path="res://assets/reed/reed_skill59.png" type="Texture" id=31]
+[ext_resource path="res://assets/reed/reed_skill08.png" type="Texture" id=32]
+[ext_resource path="res://assets/reed/reed_skill24.png" type="Texture" id=33]
+[ext_resource path="res://assets/reed/reed_skill50.png" type="Texture" id=34]
+[ext_resource path="res://assets/reed/reed_skill51.png" type="Texture" id=35]
+[ext_resource path="res://assets/reed/reed_skill40.png" type="Texture" id=36]
+[ext_resource path="res://assets/reed/reed_skill15.png" type="Texture" id=37]
+[ext_resource path="res://assets/reed/reed_skill01.png" type="Texture" id=38]
+[ext_resource path="res://assets/reed/reed_skill09.png" type="Texture" id=39]
+[ext_resource path="res://assets/reed/reed_skill28.png" type="Texture" id=40]
+[ext_resource path="res://assets/reed/reed_skill25.png" type="Texture" id=41]
+[ext_resource path="res://assets/reed/reed_skill12.png" type="Texture" id=42]
+[ext_resource path="res://assets/reed/reed_skill45.png" type="Texture" id=43]
+[ext_resource path="res://assets/reed/reed_skill19.png" type="Texture" id=44]
+[ext_resource path="res://assets/reed/reed_skill62.png" type="Texture" id=45]
+[ext_resource path="res://assets/reed/reed_skill49.png" type="Texture" id=46]
+[ext_resource path="res://assets/reed/reed_skill60.png" type="Texture" id=47]
+[ext_resource path="res://assets/reed/reed_skill35.png" type="Texture" id=48]
+[ext_resource path="res://assets/reed/reed_skill30.png" type="Texture" id=49]
+[ext_resource path="res://assets/reed/reed_skill61.png" type="Texture" id=50]
+[ext_resource path="res://assets/reed/reed_skill21.png" type="Texture" id=51]
+[ext_resource path="res://assets/reed/reed_skill20.png" type="Texture" id=52]
+[ext_resource path="res://assets/reed/reed_skill18.png" type="Texture" id=53]
+[ext_resource path="res://assets/reed/reed_skill44.png" type="Texture" id=54]
+[ext_resource path="res://assets/reed/reed_skill43.png" type="Texture" id=55]
+[ext_resource path="res://assets/reed/reed_skill42.png" type="Texture" id=56]
+[ext_resource path="res://assets/reed/reed_skill33.png" type="Texture" id=57]
+[ext_resource path="res://assets/reed/reed_skill34.png" type="Texture" id=58]
+[ext_resource path="res://assets/reed/reed_skill27.png" type="Texture" id=59]
+[ext_resource path="res://assets/reed/reed_skill29.png" type="Texture" id=60]
+[ext_resource path="res://assets/reed/reed_skill22.png" type="Texture" id=61]
+[ext_resource path="res://assets/reed/reed_skill37.png" type="Texture" id=62]
+[ext_resource path="res://assets/reed/reed_skill38.png" type="Texture" id=63]
+[ext_resource path="res://assets/reed/reed_skill31.png" type="Texture" id=64]
+[ext_resource path="res://assets/reed/reed_skill32.png" type="Texture" id=65]
+[ext_resource path="res://assets/reed/reed_skill39.png" type="Texture" id=66]
+[ext_resource path="res://assets/reed/reed_skill14.png" type="Texture" id=67]
+[ext_resource path="res://assets/reed/reed_skill07.png" type="Texture" id=68]
+[ext_resource path="res://assets/reed/reed_skill48.png" type="Texture" id=69]
+[ext_resource path="res://assets/reed/reed_skill46.png" type="Texture" id=70]
+[ext_resource path="res://assets/reed/reed_skill17.png" type="Texture" id=71]
+[ext_resource path="res://assets/reed/reed_skill16.png" type="Texture" id=72]
+[ext_resource path="res://assets/reed/reed_skill26.png" type="Texture" id=73]
+[ext_resource path="res://assets/reed/reed_skill41.png" type="Texture" id=74]
+[ext_resource path="res://assets/reed/reed_skill11.png" type="Texture" id=75]
+[ext_resource path="res://assets/reed/reed_skill47.png" type="Texture" id=76]
+[ext_resource path="res://assets/reed/reed_skill06.png" type="Texture" id=77]
+[ext_resource path="res://assets/reed/reed_skill53.png" type="Texture" id=78]
+[ext_resource path="res://assets/reed/reed_skill54.png" type="Texture" id=79]
+[ext_resource path="res://assets/reed/reed_skill36.png" type="Texture" id=80]
+[ext_resource path="res://assets/reed/reed_skill03.png" type="Texture" id=81]
+[ext_resource path="res://assets/reed/reed_skill02.png" type="Texture" id=82]
+[ext_resource path="res://assets/reed/reed_skill04.png" type="Texture" id=83]
+[ext_resource path="res://assets/reed/reed_skill13.png" type="Texture" id=84]
+[ext_resource path="res://assets/reed/reed_skill23.png" type="Texture" id=85]
+[ext_resource path="res://assets/reed/reed_skill05.png" type="Texture" id=86]
+[ext_resource path="res://assets/reed/reed_skill55.png" type="Texture" id=87]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -39,6 +101,14 @@ animations = [ {
 "speed": 12.0
 } ]
 
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 38 ), ExtResource( 82 ), ExtResource( 81 ), ExtResource( 83 ), ExtResource( 86 ), ExtResource( 77 ), ExtResource( 68 ), ExtResource( 32 ), ExtResource( 39 ), ExtResource( 26 ), ExtResource( 75 ), ExtResource( 42 ), ExtResource( 84 ), ExtResource( 67 ), ExtResource( 37 ), ExtResource( 72 ), ExtResource( 71 ), ExtResource( 53 ), ExtResource( 44 ), ExtResource( 52 ), ExtResource( 51 ), ExtResource( 61 ), ExtResource( 85 ), ExtResource( 33 ), ExtResource( 41 ), ExtResource( 73 ), ExtResource( 59 ), ExtResource( 40 ), ExtResource( 60 ), ExtResource( 49 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 48 ), ExtResource( 80 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 66 ), ExtResource( 36 ), ExtResource( 74 ), ExtResource( 56 ), ExtResource( 55 ), ExtResource( 54 ), ExtResource( 43 ), ExtResource( 70 ), ExtResource( 76 ), ExtResource( 69 ), ExtResource( 46 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 78 ), ExtResource( 79 ), ExtResource( 87 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 45 ) ],
+"loop": false,
+"name": "default",
+"speed": 12.0
+} ]
+
 [node name="Character" instance=ExtResource( 1 )]
 display_name = "Isaria"
 party_member = true
@@ -47,4 +117,13 @@ turn_order_icon = SubResource( 2 )
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2( -28, -64 )
 frames = SubResource( 1 )
-frame = 20
+frame = 23
+
+[node name="BasicAttack" parent="Actions" index="0"]
+aoe = 3
+shape = 2
+
+[node name="SkillAttack" parent="Actions" index="1"]
+aoe = 2
+mod_value = 20.0
+cut_in = SubResource( 3 )

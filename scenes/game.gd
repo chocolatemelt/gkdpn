@@ -22,7 +22,9 @@ func _ready():
 
 	for character_path in _get_resources("res://game/character/units", ".tscn"):
 		var character_resource = load(character_path)
-		party.append(character_resource.instance())
+		var character = character_resource.instance()
+		if character.party_member:
+			party.append(character)
 
 	switch_to_room(1)
 	current_room.nav_draw.visible = false
@@ -36,6 +38,7 @@ func _input(event):
 			current_room.world_update_target(adj_position)
 		elif current_act == ActState.ATTACK:
 			current_room.draw_act_target(adj_position)
+		current_room.party_face_cursor_position(adj_position)
 
 	if event is InputEventMouseButton and event.pressed:
 		var adj_position = adjust_mouse_position(event.position)
@@ -43,13 +46,13 @@ func _input(event):
 			if current_act == ActState.MOVE:
 				if current_room.move_character():
 					action_menu.set_disabled(true)
-			if current_act == ActState.ATTACK:
-				var basic_attack = turn_queue.active_character.get_attack()
+			elif current_act == ActState.ATTACK:
+				var prepared_attack = turn_queue.active_character.prepared_attack
 				var act_target = current_room.get_act_target_character()
-				if basic_attack.valid_target(act_target):
-					basic_attack.execute([act_target])
+				if prepared_attack.valid_target(act_target):
+					prepared_attack.execute([act_target])
 					action_menu._on_Attack_done()
-			if current_act == ActState.NONE:
+			elif current_act == ActState.NONE:
 				var act_target = current_room.get_position_character(adj_position)
 				if act_target and act_target != turn_queue.active_character:
 					character_info.set_character(act_target)

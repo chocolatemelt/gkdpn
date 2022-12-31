@@ -16,6 +16,8 @@ var selectable: bool = false setget set_selectable
 var can_move: bool = true
 var can_attack: bool = true
 
+var prepared_attack: Node
+
 export var display_name: String
 export var stats: Resource
 export var combat_ai: Resource
@@ -36,6 +38,8 @@ func initialize():
 	if combat_ai:
 		combat_ai.initialize(self)
 
+func face_cursor_position(cursor_position: Vector2):
+	$AnimatedSprite.set_flip_h(cursor_position.x < position.x)
 
 func alive() -> bool:
 	# Returns true if the character can perform an action
@@ -44,7 +48,6 @@ func alive() -> bool:
 func get_attack_scope() -> Scope:
 	var scope = Scope.new()
 	var atk_mod = Mod.new(-1, stats.attack_damage, 'stats.attack_damage')
-	atk_mod.debug()
 	scope.apply_mod(atk_mod)
 	return scope
 
@@ -53,8 +56,11 @@ func get_defense_scope() -> Scope:
 	scope.apply_mod(Mod.new(-1, stats.defense, 'stats.defense'))
 	return scope
 
-func get_attack() -> Node:
+func get_basic_attack() -> Node:
 	return get_node("Actions/BasicAttack")
+
+func get_skill_attack() -> Node:
+	return get_node("Actions/SkillAttack")
 
 func set_selected(value):
 	selected = value

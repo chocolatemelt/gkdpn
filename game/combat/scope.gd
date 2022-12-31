@@ -12,7 +12,6 @@ func apply_mod(mod: Mod) -> void:
 	if not modifiers.has(mod.group):
 		modifiers[mod.group] = 0.0
 	modifiers[mod.group] = mod.value + modifiers[mod.group]
-	print(modifiers)
 
 func evaluate() -> float:
 	var value = constant_mult

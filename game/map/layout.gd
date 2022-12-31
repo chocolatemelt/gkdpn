@@ -196,6 +196,11 @@ func get_party_in_pos_list(pos_list: Array, alive: bool = false) -> Dictionary:
 	return found_chara
 
 
+func party_face_cursor_position(cursor_position: Vector2):
+	for chara in party.get_children():
+		chara.face_cursor_position(cursor_position)
+
+
 func _physics_process(delta):
 	if prepared_path.size() > 0:
 		if move_to(pos_to_world(idx_to_pos[prepared_path[0]]), delta):

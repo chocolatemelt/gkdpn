@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/cam_mouse.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://game/turn_queue/turn_queue.gd" type="Script" id=4]
 [ext_resource path="res://game/interface/character/character_info.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/interface/action_menu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/cut_in.gd" type="Script" id=7]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,12 +20,16 @@ anchor_mode = 0
 script = ExtResource( 2 )
 
 [node name="Overlay" type="CanvasLayer" parent="."]
+layer = 2
+follow_viewport_enable = true
 
 [node name="Debug" type="GridContainer" parent="Overlay"]
-margin_left = 26.0
-margin_top = 670.0
-margin_right = 141.0
-margin_bottom = 708.0
+anchor_left = 0.02
+anchor_top = 0.85
+anchor_right = 0.02
+anchor_bottom = 0.85
+margin_right = 180.0
+margin_bottom = 72.0
 script = ExtResource( 3 )
 
 [node name="Map" type="Label" parent="Overlay/Debug"]
@@ -39,38 +44,55 @@ margin_right = 175.0
 margin_bottom = 23.0
 text = "hallway"
 
-[node name="Control" type="Control" parent="Overlay/Debug"]
+[node name="World" type="Label" parent="Overlay/Debug"]
 margin_top = 24.0
 margin_right = 180.0
-margin_bottom = 24.0
-
-[node name="World" type="Label" parent="Overlay/Debug"]
-margin_top = 28.0
-margin_right = 180.0
-margin_bottom = 48.0
+margin_bottom = 44.0
 text = "W:    0,    0  "
 
 [node name="Tile" type="Label" parent="Overlay/Debug"]
-margin_top = 52.0
+margin_top = 48.0
 margin_right = 180.0
-margin_bottom = 72.0
+margin_bottom = 68.0
 text = "T:    0,    0 [NA]"
 
 [node name="TurnQueue" type="HBoxContainer" parent="Overlay"]
-margin_left = 34.0
-margin_top = 28.0
-margin_right = 634.0
-margin_bottom = 68.0
+anchor_left = 0.01
+anchor_top = 0.02
+anchor_right = 0.01
+anchor_bottom = 0.02
+margin_right = 600.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 script = ExtResource( 4 )
 
 [node name="CharacterInfo" parent="Overlay" instance=ExtResource( 5 )]
-margin_left = 236.0
-margin_top = 663.0
-margin_right = 460.0
-margin_bottom = 745.0
+anchor_left = 0.21
+anchor_top = 0.84
+anchor_right = 0.21
+anchor_bottom = 0.84
+margin_right = 224.0
+margin_bottom = 82.0
 
 [node name="ActionMenu" parent="Overlay" instance=ExtResource( 6 )]
+anchor_left = 0.45
+anchor_top = 0.84
+anchor_right = 0.45
+anchor_bottom = 0.84
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 189.0
+margin_bottom = 81.0
+
+[node name="FX" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+
+[node name="CutIn" type="Node2D" parent="FX"]
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="FX/CutIn"]
+z_index = 1
 
 [connection signal="item_selected" from="Overlay/Debug/Map/MapSelect" to="." method="switch_to_room"]
+[connection signal="animation_finished" from="FX/CutIn/AnimatedSprite" to="FX/CutIn" method="_on_AnimatedSprite_animation_finished"]
